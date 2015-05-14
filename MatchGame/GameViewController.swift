@@ -27,8 +27,10 @@ class GameViewController: UIViewController {
             scene.scaleMode = .AspectFill
             println("the scene \(scene.size.width), and \(scene.size.height)")
         
-            level = Level()
+            level = Level(filename: "Level_1")
             scene.level = level
+        
+            scene.addTiles()
         
             skView.presentScene(scene)
         
