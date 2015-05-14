@@ -25,6 +25,7 @@
 		CCDC02F81B055DF6004CD7A8 /* Level_4.json in Resources */ = {isa = PBXBuildFile; fileRef = CCDC02F31B055DF6004CD7A8 /* Level_4.json */; };
 		CCDC02FA1B056109004CD7A8 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02F91B056109004CD7A8 /* Tile.swift */; };
 		CCDC02FC1B0561C1004CD7A8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02FB1B0561C1004CD7A8 /* Extensions.swift */; };
+		CCDC02FE1B056846004CD7A8 /* Swap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02FD1B056846004CD7A8 /* Swap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		CCDC02F31B055DF6004CD7A8 /* Level_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_4.json; sourceTree = "<group>"; };
 		CCDC02F91B056109004CD7A8 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		CCDC02FB1B0561C1004CD7A8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CCDC02FD1B056846004CD7A8 /* Swap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				CCDC02C61B053BE0004CD7A8 /* GameScene.swift */,
 				CCDC02C81B053BE0004CD7A8 /* GameViewController.swift */,
 				CCDC02EA1B05534B004CD7A8 /* Array2D.swift */,
+				CCDC02FD1B056846004CD7A8 /* Swap.swift */,
 				CCDC02EC1B0554CE004CD7A8 /* Level.swift */,
 				CCDC02FB1B0561C1004CD7A8 /* Extensions.swift */,
 				CCDC02F91B056109004CD7A8 /* Tile.swift */,
@@ -270,6 +273,7 @@
 				CCDC02C91B053BE0004CD7A8 /* GameViewController.swift in Sources */,
 				CCDC02C31B053BE0004CD7A8 /* AppDelegate.swift in Sources */,
 				CCDC02EB1B05534B004CD7A8 /* Array2D.swift in Sources */,
+				CCDC02FE1B056846004CD7A8 /* Swap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
