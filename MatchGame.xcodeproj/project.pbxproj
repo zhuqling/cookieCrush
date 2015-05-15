@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCBDFF251B06ADE8005DE640 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBDFF241B06ADE8005DE640 /* CloudKit.framework */; };
 		CCDC02C31B053BE0004CD7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02C21B053BE0004CD7A8 /* AppDelegate.swift */; };
 		CCDC02C71B053BE0004CD7A8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02C61B053BE0004CD7A8 /* GameScene.swift */; };
 		CCDC02C91B053BE0004CD7A8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02C81B053BE0004CD7A8 /* GameViewController.swift */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CCBDFF231B06ADE2005DE640 /* MatchGame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MatchGame.entitlements; sourceTree = "<group>"; };
+		CCBDFF241B06ADE8005DE640 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CCDC02BD1B053BE0004CD7A8 /* MatchGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCDC02C11B053BE0004CD7A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCDC02C21B053BE0004CD7A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCBDFF251B06ADE8005DE640 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +101,7 @@
 		CCDC02B41B053BE0004CD7A8 = {
 			isa = PBXGroup;
 			children = (
+				CCBDFF241B06ADE8005DE640 /* CloudKit.framework */,
 				CCDC02BF1B053BE0004CD7A8 /* MatchGame */,
 				CCDC02D91B053BE0004CD7A8 /* MatchGameTests */,
 				CCDC02BE1B053BE0004CD7A8 /* Products */,
@@ -115,6 +120,7 @@
 		CCDC02BF1B053BE0004CD7A8 /* MatchGame */ = {
 			isa = PBXGroup;
 			children = (
+				CCBDFF231B06ADE2005DE640 /* MatchGame.entitlements */,
 				CCDC02C21B053BE0004CD7A8 /* AppDelegate.swift */,
 				CCDC02C61B053BE0004CD7A8 /* GameScene.swift */,
 				CCDC02C81B053BE0004CD7A8 /* GameViewController.swift */,
@@ -234,6 +240,12 @@
 				TargetAttributes = {
 					CCDC02BC1B053BE0004CD7A8 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 4NPA9YHQ69;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					CCDC02D51B053BE0004CD7A8 = {
 						CreatedOnToolsVersion = 6.3;
@@ -432,9 +444,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MatchGame/MatchGame.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MatchGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -442,9 +458,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MatchGame/MatchGame.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MatchGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
