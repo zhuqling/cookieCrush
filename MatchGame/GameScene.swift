@@ -26,6 +26,14 @@ class GameScene: SKScene {
     
     var swipeHandler: ((Swap) -> ())?
     
+    var selectionSprite = SKSpriteNode()//for highlight
+    
+    let swapSound = SKAction.playSoundFileNamed("Chomp.wav", waitForCompletion: false)
+    let invalidSwapSound = SKAction.playSoundFileNamed("Error.wav", waitForCompletion: false)
+    let matchSound = SKAction.playSoundFileNamed("Ka-Ching.wav", waitForCompletion: false)
+    let fallingCookieSound = SKAction.playSoundFileNamed("Scrape.wav", waitForCompletion: false)
+    let addCookieSound = SKAction.playSoundFileNamed("Drip.wav", waitForCompletion: false)
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder) is not used in this app")
@@ -99,6 +107,8 @@ class GameScene: SKScene {
             // 3
             if let cookie = level.cookieAtColumn(column, row: row) {
                 // 4
+                showSelectionIndicatorForCookie(cookie)
+                
                 swipeFromColumn = column
                 swipeFromRow = row
             }
@@ -142,6 +152,7 @@ class GameScene: SKScene {
             if horzDelta != 0 || vertDelta != 0 {
                 trySwapHorizontal(horzDelta, vertical: vertDelta)
                 
+                hideSelectionIndicator()
                 // 5
                 swipeFromColumn = nil
             }
@@ -170,6 +181,10 @@ class GameScene: SKScene {
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         swipeFromColumn = nil
         swipeFromRow = nil
+        
+        if selectionSprite.parent != nil && swipeFromColumn != nil {
+            hideSelectionIndicator()
+        }//handles the tap gesture
     }
     
     override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -177,6 +192,10 @@ class GameScene: SKScene {
     }
     
     func animateSwap(swap: Swap, completion: () -> ()) {
+        
+        runAction(swapSound)
+        
+        
         let spriteA = swap.cookieA.sprite!
         let spriteB = swap.cookieB.sprite!
         
@@ -192,5 +211,51 @@ class GameScene: SKScene {
         let moveB = SKAction.moveTo(spriteA.position, duration: Duration)
         moveB.timingMode = .EaseOut
         spriteB.runAction(moveB)
+    }
+    
+    //for highlighting the selected object
+    func showSelectionIndicatorForCookie(cookie: Cookie) {
+        if selectionSprite.parent != nil {
+            selectionSprite.removeFromParent()
+        }
+        
+        if let sprite = cookie.sprite {
+            let texture = SKTexture(imageNamed: cookie.cookieType.highlightedSpriteName)
+            selectionSprite.size = texture.size()
+            selectionSprite.runAction(SKAction.setTexture(texture))
+            
+            sprite.addChild(selectionSprite)
+            selectionSprite.alpha = 1.0
+        }
+    }
+    
+    func hideSelectionIndicator() {
+        selectionSprite.runAction(SKAction.sequence([
+            SKAction.fadeOutWithDuration(0.3),
+            SKAction.removeFromParent()]))
+    }
+    
+    
+    func animateInvalidSwap(swap: Swap, completion: () -> ()) {
+        
+        runAction(invalidSwapSound)
+        
+        
+        let spriteA = swap.cookieA.sprite!
+        let spriteB = swap.cookieB.sprite!
+        
+        spriteA.zPosition = 100
+        spriteB.zPosition = 90
+        
+        let Duration: NSTimeInterval = 0.2
+        
+        let moveA = SKAction.moveTo(spriteB.position, duration: Duration)
+        moveA.timingMode = .EaseOut
+        
+        let moveB = SKAction.moveTo(spriteA.position, duration: Duration)
+        moveB.timingMode = .EaseOut
+        
+        spriteA.runAction(SKAction.sequence([moveA, moveB]), completion: completion)
+        spriteB.runAction(SKAction.sequence([moveB, moveA]))
     }
 }
