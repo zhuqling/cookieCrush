@@ -1,10 +1,165 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LVB-YS-i5n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PP0-dS-baF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Menu View Controller-->
+        <scene sceneID="FfP-8J-71a">
+            <objects>
+                <viewController id="Fdd-f5-wif" customClass="menuViewController" customModule="MatchGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Sm8-xn-WE5"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ky6-e9-iub"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eLL-i4-9NE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGB-nQ-QlS">
+                                <rect key="frame" x="228" y="60" width="144" height="40"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8X-o0-N4O">
+                                <rect key="frame" x="225" y="281" width="150" height="39"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="22"/>
+                                <state key="normal" title="Leader Board">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="leaderBoardButton:" destination="Fdd-f5-wif" eventType="touchUpInside" id="iHC-em-4WN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5HD-LR-OVr">
+                                <rect key="frame" x="233" y="355" width="134" height="39"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="22"/>
+                                <state key="normal" title="How to Play">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="nda-fY-Vne" kind="show" id="pM2-i8-TYz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQW-h0-isv">
+                                <rect key="frame" x="271" y="207" width="58" height="39"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="22"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startButton:" destination="Fdd-f5-wif" eventType="touchUpInside" id="lBo-z5-ARA"/>
+                                    <segue destination="LVB-YS-i5n" kind="show" id="25A-oz-OrX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.19890207695005713" green="0.3035581653683937" blue="0.58676609848484851" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="eGB-nQ-QlS" firstAttribute="top" secondItem="Sm8-xn-WE5" secondAttribute="bottom" constant="40" id="3md-BO-9Kw"/>
+                            <constraint firstAttribute="centerX" secondItem="a8X-o0-N4O" secondAttribute="centerX" id="OvU-gH-dad"/>
+                            <constraint firstItem="5HD-LR-OVr" firstAttribute="top" secondItem="a8X-o0-N4O" secondAttribute="bottom" constant="35" id="ULj-eM-0kx"/>
+                            <constraint firstAttribute="centerY" secondItem="a8X-o0-N4O" secondAttribute="centerY" id="l1s-L7-o5m"/>
+                            <constraint firstAttribute="centerX" secondItem="5HD-LR-OVr" secondAttribute="centerX" id="lRC-T7-nCF"/>
+                            <constraint firstAttribute="centerX" secondItem="GQW-h0-isv" secondAttribute="centerX" id="vvf-O2-F6m"/>
+                            <constraint firstAttribute="centerX" secondItem="eGB-nQ-QlS" secondAttribute="centerX" id="yZH-Vi-PyI"/>
+                            <constraint firstItem="a8X-o0-N4O" firstAttribute="top" secondItem="GQW-h0-isv" secondAttribute="bottom" constant="35" id="z0O-Iz-v1w"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="A86-Tb-oel"/>
+                    <connections>
+                        <outlet property="instructionsButton" destination="5HD-LR-OVr" id="06Q-Vn-Rd6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iF4-ng-Hsz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="312" y="190"/>
+        </scene>
+        <!--Instruction Controller-->
+        <scene sceneID="AHA-9q-Nw4">
+            <objects>
+                <viewController id="nda-fY-Vne" customClass="instructionController" customModule="MatchGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0zA-GS-Cvo"/>
+                        <viewControllerLayoutGuide type="bottom" id="MDo-L4-KJ0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ccL-an-khl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="6u3-QC-iWG">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="48k-cg-hFz">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="616"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New to the Game?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFI-OW-ytC">
+                                        <rect key="frame" x="182" y="33" width="237" height="32"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="26"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zc-Vv-4uw">
+                                        <rect key="frame" x="40" y="95" width="520" height="453"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <string key="text">Welcome to Cookie Crush! This is a game which you should swipe to create cookies of the same type in a chain, thus to dismiss them for points. Of course, if the chain is longer than 3, you'll get more points for the combo. And BTW, If you can not find one, press shuffle for help. Enjoy!</string>
+                                        <color key="textColor" red="0.963482481" green="0.963482481" blue="0.963482481" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMz-se-cfb">
+                                        <rect key="frame" x="275" y="556" width="51" height="35"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                        <state key="normal" title="menu">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="menuButton:" destination="nda-fY-Vne" eventType="touchUpInside" id="cpR-W1-leV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="2Zc-Vv-4uw" firstAttribute="top" secondItem="tFI-OW-ytC" secondAttribute="bottom" constant="30" id="2u0-gf-37l"/>
+                                    <constraint firstAttribute="centerX" secondItem="tFI-OW-ytC" secondAttribute="centerX" id="ERl-eF-eFA"/>
+                                    <constraint firstAttribute="centerX" secondItem="SMz-se-cfb" secondAttribute="centerX" id="T0d-f5-GMk"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Zc-Vv-4uw" secondAttribute="trailing" constant="40" id="eBr-Qf-swO"/>
+                                    <constraint firstAttribute="bottom" secondItem="SMz-se-cfb" secondAttribute="bottom" constant="25" id="gIi-6b-czi"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="2Zc-Vv-4uw" secondAttribute="bottom" constant="60" id="ik0-wN-Pum"/>
+                                    <constraint firstItem="2Zc-Vv-4uw" firstAttribute="leading" secondItem="48k-cg-hFz" secondAttribute="leading" constant="40" id="jDg-rf-8bS"/>
+                                    <constraint firstItem="tFI-OW-ytC" firstAttribute="top" secondItem="48k-cg-hFz" secondAttribute="top" constant="33" id="rp7-vc-JZ9"/>
+                                    <constraint firstAttribute="bottom" secondItem="2Zc-Vv-4uw" secondAttribute="bottom" constant="20" id="sui-Zx-mll"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="sui-Zx-mll"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MDo-L4-KJ0" firstAttribute="top" secondItem="48k-cg-hFz" secondAttribute="bottom" constant="-16" id="47A-ZP-0SF"/>
+                            <constraint firstItem="6u3-QC-iWG" firstAttribute="leading" secondItem="ccL-an-khl" secondAttribute="leadingMargin" constant="-16" id="ATC-BJ-kH5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="48k-cg-hFz" secondAttribute="trailing" constant="-16" id="NRW-20-Ndt"/>
+                            <constraint firstItem="MDo-L4-KJ0" firstAttribute="top" secondItem="6u3-QC-iWG" secondAttribute="bottom" id="e7O-q1-VHJ"/>
+                            <constraint firstItem="6u3-QC-iWG" firstAttribute="top" secondItem="ccL-an-khl" secondAttribute="topMargin" id="h4b-KE-U6u"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6u3-QC-iWG" secondAttribute="trailing" constant="-16" id="ht8-5L-Zqo"/>
+                            <constraint firstItem="48k-cg-hFz" firstAttribute="top" secondItem="0zA-GS-Cvo" secondAttribute="bottom" constant="-20" id="hvR-nW-g1l"/>
+                            <constraint firstItem="48k-cg-hFz" firstAttribute="leading" secondItem="ccL-an-khl" secondAttribute="leadingMargin" constant="-16" id="pU1-PI-XdW"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="emT-Ok-JUy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1031" y="1178"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="CtS-rA-C9T">
             <objects>
@@ -60,13 +215,24 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyw-ex-sXH">
-                                <rect key="frame" x="250" y="539" width="100" height="36"/>
+                                <rect key="frame" x="250" y="504" width="100" height="36"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
-                                <state key="normal" title="Button" backgroundImage="Button">
+                                <state key="normal" title="Shuffle" backgroundImage="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="shuffleButtonTapped:" destination="LVB-YS-i5n" eventType="touchUpInside" id="HdT-a7-8vV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkh-jo-C1K">
+                                <rect key="frame" x="250" y="544" width="100" height="36"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                <state key="normal" title="Menu" backgroundImage="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="menuButtonTapped:" destination="LVB-YS-i5n" eventType="touchUpInside" id="TMQ-ql-ejR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -74,12 +240,14 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="P4n-li-KJN" secondAttribute="trailing" constant="20" id="0Pi-tP-Gdx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qyA-OF-dc0" secondAttribute="trailing" constant="40" id="6P6-it-Pcd"/>
-                            <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="zyw-ex-sXH" secondAttribute="bottom" constant="25" id="7C8-ar-eww"/>
+                            <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="zyw-ex-sXH" secondAttribute="bottom" constant="60" id="7C8-ar-eww"/>
                             <constraint firstAttribute="centerX" secondItem="P4n-li-KJN" secondAttribute="centerX" id="8BG-jc-PGY"/>
                             <constraint firstAttribute="centerX" secondItem="6db-OR-ppd" secondAttribute="centerX" id="Ce0-fQ-quw"/>
                             <constraint firstAttribute="centerX" secondItem="zyw-ex-sXH" secondAttribute="centerX" id="HuN-lg-qJr"/>
                             <constraint firstItem="SQ0-kA-YEB" firstAttribute="top" secondItem="qyA-OF-dc0" secondAttribute="bottom" constant="20" id="M14-VE-hJz"/>
                             <constraint firstItem="6db-OR-ppd" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="40" id="M7u-Ay-50j"/>
+                            <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="gkh-jo-C1K" secondAttribute="bottom" constant="20" id="QPK-hG-SvL"/>
+                            <constraint firstAttribute="centerX" secondItem="gkh-jo-C1K" secondAttribute="centerX" id="SQM-41-wX6"/>
                             <constraint firstItem="ey6-fD-iBJ" firstAttribute="top" secondItem="I2J-dv-2IO" secondAttribute="bottom" constant="20" id="V0Q-NJ-dBM"/>
                             <constraint firstItem="qyA-OF-dc0" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="40" id="Wuc-O5-CDO"/>
                             <constraint firstItem="SQ0-kA-YEB" firstAttribute="centerX" secondItem="qyA-OF-dc0" secondAttribute="centerX" id="Xhq-ja-gI8"/>
@@ -102,6 +270,7 @@
                     </view>
                     <connections>
                         <outlet property="gameEndView" destination="P4n-li-KJN" id="weZ-dR-LAt"/>
+                        <outlet property="menuButton" destination="gkh-jo-C1K" id="gHt-UX-GBf"/>
                         <outlet property="movesLabel" destination="Int-n0-Ol2" id="1Of-K4-7bL"/>
                         <outlet property="scoreLabel" destination="SQ0-kA-YEB" id="5J9-Pw-Ing"/>
                         <outlet property="shuffleButton" destination="zyw-ex-sXH" id="lyW-4i-mmi"/>
@@ -110,10 +279,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="177" y="190"/>
+            <point key="canvasLocation" x="1031" y="-254"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Vgl-Vo-j1T">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="PP0-dS-baF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gyl-KW-IdX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Fdd-f5-wif" kind="relationship" relationship="rootViewController" id="1K9-u1-c6W"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I1n-ga-Zsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-500" y="190"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Background" width="640" height="1136"/>
         <image name="Button" width="100" height="36"/>
     </resources>
 </document>

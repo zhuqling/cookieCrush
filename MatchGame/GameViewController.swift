@@ -19,6 +19,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBOutlet weak var shuffleButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     
     @IBOutlet weak var gameEndView: UIImageView!
     var tapGestureRecognizer: UITapGestureRecognizer!
@@ -28,8 +29,6 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("tableViewdidLoad", object: self)
         
             self.gameEndView.hidden = true
             // Configure the view.
@@ -71,9 +70,17 @@ class GameViewController: UIViewController {
         decrementMoves()
     }
     
+    
+    @IBAction func menuButtonTapped(sender: UIButton) {
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    
     func showGameEnd() {
         
         self.shuffleButton.hidden = true
+        self.menuButton.hidden = true
         
         self.gameEndView.hidden = false
         scene.userInteractionEnabled = false
@@ -126,6 +133,7 @@ class GameViewController: UIViewController {
         
        
             self.shuffleButton.hidden = false
+            self.menuButton.hidden = false
         
     }
     

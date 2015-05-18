@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CC5518221B0A342400CA85E9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518211B0A342400CA85E9 /* Line.swift */; };
 		CC5518241B0A5DBC00CA85E9 /* cookie.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5518231B0A5DBC00CA85E9 /* cookie.png */; };
+		CC5518261B0A6A2700CA85E9 /* menuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518251B0A6A2700CA85E9 /* menuViewController.swift */; };
+		CC5518281B0A723700CA85E9 /* instructionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518271B0A723700CA85E9 /* instructionController.swift */; };
 		CCBDFF251B06ADE8005DE640 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBDFF241B06ADE8005DE640 /* CloudKit.framework */; };
 		CCDC02C31B053BE0004CD7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02C21B053BE0004CD7A8 /* AppDelegate.swift */; };
 		CCDC02C71B053BE0004CD7A8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02C61B053BE0004CD7A8 /* GameScene.swift */; };
@@ -50,6 +52,8 @@
 /* Begin PBXFileReference section */
 		CC5518211B0A342400CA85E9 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		CC5518231B0A5DBC00CA85E9 /* cookie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookie.png; sourceTree = "<group>"; };
+		CC5518251B0A6A2700CA85E9 /* menuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuViewController.swift; sourceTree = "<group>"; };
+		CC5518271B0A723700CA85E9 /* instructionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = instructionController.swift; sourceTree = "<group>"; };
 		CCBDFF231B06ADE2005DE640 /* MatchGame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MatchGame.entitlements; sourceTree = "<group>"; };
 		CCBDFF241B06ADE8005DE640 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CCDC02BD1B053BE0004CD7A8 /* MatchGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +137,8 @@
 				CCDC02FD1B056846004CD7A8 /* Swap.swift */,
 				CCDC02EC1B0554CE004CD7A8 /* Level.swift */,
 				CCDC02FB1B0561C1004CD7A8 /* Extensions.swift */,
+				CC5518271B0A723700CA85E9 /* instructionController.swift */,
+				CC5518251B0A6A2700CA85E9 /* menuViewController.swift */,
 				CCDC02F91B056109004CD7A8 /* Tile.swift */,
 				CCDC02E81B054BBA004CD7A8 /* Cookie.swift */,
 				CCDC02CA1B053BE0004CD7A8 /* Main.storyboard */,
@@ -316,11 +322,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC5518281B0A723700CA85E9 /* instructionController.swift in Sources */,
 				CCDC02ED1B0554CE004CD7A8 /* Level.swift in Sources */,
 				CCDC02C71B053BE0004CD7A8 /* GameScene.swift in Sources */,
 				CCDC02E91B054BBA004CD7A8 /* Cookie.swift in Sources */,
 				CCDC02FC1B0561C1004CD7A8 /* Extensions.swift in Sources */,
 				CCDC02FA1B056109004CD7A8 /* Tile.swift in Sources */,
+				CC5518261B0A6A2700CA85E9 /* menuViewController.swift in Sources */,
 				CCDC02C91B053BE0004CD7A8 /* GameViewController.swift in Sources */,
 				CCDC02C31B053BE0004CD7A8 /* AppDelegate.swift in Sources */,
 				CCDC02EB1B05534B004CD7A8 /* Array2D.swift in Sources */,
