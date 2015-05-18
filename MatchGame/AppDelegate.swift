@@ -12,11 +12,39 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var splash:UIImageView?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        let center = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector: "removeSplashView", name: "tableViewdidLoad", object: nil)
+        
+        splash = UIImageView(frame: self.window!.bounds)
+        splash!.backgroundColor = UIColor.whiteColor()
+        
+        let iconView = UIView(frame: CGRectMake(self.window!.bounds.size.width/2-100, self.window!.bounds.size.height/2-100, 200, 200))
+        
+        let imageView = UIImageView(image: UIImage(named: "cookie.png"))
+        
+        iconView.addSubview(imageView)
+        splash!.addSubview(iconView)
+        
+        self.window!.rootViewController!.view.addSubview(splash!)
+        
         return true
+    }
+    
+    func removeSplashView(){
+        
+        UIView.animateWithDuration(2.0,
+            animations: {self.splash!.alpha = 0.0},
+            completion: {
+                (value: Bool) in
+                
+                self.splash?.removeFromSuperview()
+        })
     }
 
     func applicationWillResignActive(application: UIApplication) {

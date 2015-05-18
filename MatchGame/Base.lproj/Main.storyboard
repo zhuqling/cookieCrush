@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LVB-YS-i5n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LVB-YS-i5n">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="CtS-rA-C9T">
             <objects>
-                <viewController id="LVB-YS-i5n" customClass="GameViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LVB-YS-i5n" customClass="GameViewController" customModule="MatchGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PCf-gQ-wO7"/>
                         <viewControllerLayoutGuide type="bottom" id="b3d-qh-BLL"/>
@@ -15,11 +16,104 @@
                     <view key="view" contentMode="scaleToFill" id="bdc-N1-crn" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2J-dv-2IO">
+                                <rect key="frame" x="56" y="60" width="70" height="23"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ey6-fD-iBJ">
+                                <rect key="frame" x="58" y="103" width="67" height="21"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moves: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6db-OR-ppd">
+                                <rect key="frame" x="265" y="60" width="71" height="23"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Int-n0-Ol2">
+                                <rect key="frame" x="267" y="103" width="67" height="21"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyA-OF-dc0">
+                                <rect key="frame" x="483" y="60" width="61" height="23"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQ0-kA-YEB">
+                                <rect key="frame" x="480" y="103" width="67" height="21"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P4n-li-KJN">
+                                <rect key="frame" x="36" y="220" width="528" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="qyd-N3-Idd"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyw-ex-sXH">
+                                <rect key="frame" x="250" y="539" width="100" height="36"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="18"/>
+                                <state key="normal" title="Button" backgroundImage="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shuffleButtonTapped:" destination="LVB-YS-i5n" eventType="touchUpInside" id="HdT-a7-8vV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="P4n-li-KJN" secondAttribute="trailing" constant="20" id="0Pi-tP-Gdx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qyA-OF-dc0" secondAttribute="trailing" constant="40" id="6P6-it-Pcd"/>
+                            <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="zyw-ex-sXH" secondAttribute="bottom" constant="25" id="7C8-ar-eww"/>
+                            <constraint firstAttribute="centerX" secondItem="P4n-li-KJN" secondAttribute="centerX" id="8BG-jc-PGY"/>
+                            <constraint firstAttribute="centerX" secondItem="6db-OR-ppd" secondAttribute="centerX" id="Ce0-fQ-quw"/>
+                            <constraint firstAttribute="centerX" secondItem="zyw-ex-sXH" secondAttribute="centerX" id="HuN-lg-qJr"/>
+                            <constraint firstItem="SQ0-kA-YEB" firstAttribute="top" secondItem="qyA-OF-dc0" secondAttribute="bottom" constant="20" id="M14-VE-hJz"/>
+                            <constraint firstItem="6db-OR-ppd" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="40" id="M7u-Ay-50j"/>
+                            <constraint firstItem="ey6-fD-iBJ" firstAttribute="top" secondItem="I2J-dv-2IO" secondAttribute="bottom" constant="20" id="V0Q-NJ-dBM"/>
+                            <constraint firstItem="qyA-OF-dc0" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="40" id="Wuc-O5-CDO"/>
+                            <constraint firstItem="SQ0-kA-YEB" firstAttribute="centerX" secondItem="qyA-OF-dc0" secondAttribute="centerX" id="Xhq-ja-gI8"/>
+                            <constraint firstItem="Int-n0-Ol2" firstAttribute="top" secondItem="6db-OR-ppd" secondAttribute="bottom" constant="20" id="cht-KP-NRu"/>
+                            <constraint firstAttribute="centerX" secondItem="ey6-fD-iBJ" secondAttribute="centerX" id="dv0-JG-d2D"/>
+                            <constraint firstAttribute="centerX" secondItem="I2J-dv-2IO" secondAttribute="centerX" id="fh2-rx-dL1"/>
+                            <constraint firstItem="I2J-dv-2IO" firstAttribute="leading" secondItem="bdc-N1-crn" secondAttribute="leadingMargin" constant="40" id="gbc-zF-wMI"/>
+                            <constraint firstItem="6db-OR-ppd" firstAttribute="centerX" secondItem="Int-n0-Ol2" secondAttribute="centerX" id="hz7-7p-SRG"/>
+                            <constraint firstAttribute="centerY" secondItem="P4n-li-KJN" secondAttribute="centerY" id="i2h-bK-dY3"/>
+                            <constraint firstItem="ey6-fD-iBJ" firstAttribute="centerX" secondItem="I2J-dv-2IO" secondAttribute="centerX" id="t4K-Mp-za2"/>
+                            <constraint firstItem="I2J-dv-2IO" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="40" id="vzP-ut-AUd"/>
+                            <constraint firstItem="P4n-li-KJN" firstAttribute="leading" secondItem="bdc-N1-crn" secondAttribute="leadingMargin" constant="20" id="xMK-N2-qI9"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fh2-rx-dL1"/>
+                                <exclude reference="dv0-JG-d2D"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="gameEndView" destination="P4n-li-KJN" id="weZ-dR-LAt"/>
+                        <outlet property="movesLabel" destination="Int-n0-Ol2" id="1Of-K4-7bL"/>
+                        <outlet property="scoreLabel" destination="SQ0-kA-YEB" id="5J9-Pw-Ing"/>
+                        <outlet property="shuffleButton" destination="zyw-ex-sXH" id="lyW-4i-mmi"/>
+                        <outlet property="targetLabel" destination="ey6-fD-iBJ" id="Imj-8S-SUa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="177" y="190"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Button" width="100" height="36"/>
+    </resources>
 </document>
