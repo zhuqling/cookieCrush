@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+
+//The objects that you put into the set must conform to the Hashable protocol
 class Cookie :Printable, Hashable {
     var column: Int
     var row: Int
@@ -28,6 +30,13 @@ class Cookie :Printable, Hashable {
     var hashValue: Int {
         return row*10 + column
     }
+    //required for hashable protocol
+}
+
+
+//pragma mark - supply the == comparison operator for comparing two objects of the same type
+func ==(lhs: Cookie, rhs: Cookie) -> Bool {
+    return lhs.column == rhs.column && lhs.row == rhs.row
 }
 
 enum CookieType: Int, Printable {
@@ -57,8 +66,4 @@ enum CookieType: Int, Printable {
     var description: String {
         return spriteName
     }
-}
-
-func ==(lhs: Cookie, rhs: Cookie) -> Bool {
-    return lhs.column == rhs.column && lhs.row == rhs.row
 }

@@ -22,18 +22,19 @@ class Level {
         // 1
         if let dictionary = Dictionary<String, AnyObject>.loadJSONFromBundle(filename) {
             // 2
-            if let tilesArray: AnyObject = dictionary["tiles"] {
-                // 3
-                for (row, rowArray) in enumerate(tilesArray as! [[Int]]) {
-                    // 4
-                    let tileRow = NumRows - row - 1
-                    // 5
-                    for (column, value) in enumerate(rowArray) {
-                        if value == 1 {
-                            tiles[column, tileRow] = Tile()
+            if let tilesArray: AnyObject = dictionary["tiles"]
+            {
+                    // 3
+                    for (row, rowArray) in enumerate(tilesArray as! [[Int]]) {
+                        // 4
+                        let tileRow = NumRows - row - 1
+                        // 5
+                        for (column, value) in enumerate(rowArray) {
+                            if value == 1 {
+                                tiles[column, tileRow] = Tile()
+                            }
                         }
                     }
-                }
             }
         }
     }
@@ -58,6 +59,31 @@ class Level {
         
         return set
     }
+    
+    
+    private func createInitialCookies() -> Set<Cookie> {
+        var set = Set<Cookie>()
+        
+        // 1
+        for row in 0..<NumRows {
+            for column in 0..<NumColumns {
+                
+                if tiles[column, row] != nil
+                {
+                    // 2
+                    var cookieType = CookieType.random()
+                    // 3
+                    let cookie = Cookie(column: column, row: row, cookieType: cookieType)
+                    cookies[column, row] = cookie
+                    
+                    // 4
+                    set.insert(cookie)
+                }
+            }
+        }
+        return set
+    }
+    
     
     func detectPossibleSwaps() {
         var set = Set<Swap>()
@@ -129,29 +155,6 @@ class Level {
         for var i = row + 1; i < NumRows && cookies[column, i]?.cookieType == cookieType;
             ++i, ++vertLength { }
         return vertLength >= 3
-    }
-    
-    private func createInitialCookies() -> Set<Cookie> {
-        var set = Set<Cookie>()
-        
-        // 1
-        for row in 0..<NumRows {
-            for column in 0..<NumColumns {
-                
-                if tiles[column, row] != nil
-                {
-                    // 2
-                    var cookieType = CookieType.random()
-                    // 3
-                    let cookie = Cookie(column: column, row: row, cookieType: cookieType)
-                    cookies[column, row] = cookie
-                
-                    // 4
-                    set.insert(cookie)
-                }
-            }
-        }
-        return set
     }
     
     

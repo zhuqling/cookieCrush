@@ -29,6 +29,7 @@ class GameViewController: UIViewController {
         
             level = Level(filename: "Level_1")
             scene.level = level
+            //init the level instance to assgin the property
         
             scene.addTiles()
         

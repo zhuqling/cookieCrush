@@ -12,13 +12,11 @@ class GameScene: SKScene {
     
     var level: Level!
     
-    let TileWidth: CGFloat = 32.0
-    let TileHeight: CGFloat = 36.0
+    let TileWidth: CGFloat = 34.0
+    let TileHeight: CGFloat = 38.0
     
     let gameLayer = SKNode()
     let cookiesLayer = SKNode()
-    
-    
     let tilesLayer = SKNode()
     
     var swipeFromColumn: Int?
