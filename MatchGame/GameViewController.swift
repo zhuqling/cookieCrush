@@ -87,6 +87,9 @@ class GameViewController: UIViewController {
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hideGameEnd")
         view.addGestureRecognizer(tapGestureRecognizer)
+        
+        
+        
     }
     
     func hideGameEnd() {
