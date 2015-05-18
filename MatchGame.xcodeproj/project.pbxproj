@@ -11,6 +11,7 @@
 		CC5518241B0A5DBC00CA85E9 /* cookie.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5518231B0A5DBC00CA85E9 /* cookie.png */; };
 		CC5518261B0A6A2700CA85E9 /* menuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518251B0A6A2700CA85E9 /* menuViewController.swift */; };
 		CC5518281B0A723700CA85E9 /* instructionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518271B0A723700CA85E9 /* instructionController.swift */; };
+		CC55182A1B0A8BD300CA85E9 /* leaderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518291B0A8BD300CA85E9 /* leaderTableViewController.swift */; };
 		CCBDFF251B06ADE8005DE640 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBDFF241B06ADE8005DE640 /* CloudKit.framework */; };
 		CCDC02C31B053BE0004CD7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02C21B053BE0004CD7A8 /* AppDelegate.swift */; };
 		CCDC02C71B053BE0004CD7A8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC02C61B053BE0004CD7A8 /* GameScene.swift */; };
@@ -54,6 +55,7 @@
 		CC5518231B0A5DBC00CA85E9 /* cookie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookie.png; sourceTree = "<group>"; };
 		CC5518251B0A6A2700CA85E9 /* menuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuViewController.swift; sourceTree = "<group>"; };
 		CC5518271B0A723700CA85E9 /* instructionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = instructionController.swift; sourceTree = "<group>"; };
+		CC5518291B0A8BD300CA85E9 /* leaderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = leaderTableViewController.swift; sourceTree = "<group>"; };
 		CCBDFF231B06ADE2005DE640 /* MatchGame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MatchGame.entitlements; sourceTree = "<group>"; };
 		CCBDFF241B06ADE8005DE640 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CCDC02BD1B053BE0004CD7A8 /* MatchGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +135,7 @@
 				CCDC02C61B053BE0004CD7A8 /* GameScene.swift */,
 				CCDC02C81B053BE0004CD7A8 /* GameViewController.swift */,
 				CC5518211B0A342400CA85E9 /* Line.swift */,
+				CC5518291B0A8BD300CA85E9 /* leaderTableViewController.swift */,
 				CCDC02EA1B05534B004CD7A8 /* Array2D.swift */,
 				CCDC02FD1B056846004CD7A8 /* Swap.swift */,
 				CCDC02EC1B0554CE004CD7A8 /* Level.swift */,
@@ -334,6 +337,7 @@
 				CCDC02EB1B05534B004CD7A8 /* Array2D.swift in Sources */,
 				CCDC02FE1B056846004CD7A8 /* Swap.swift in Sources */,
 				CC5518221B0A342400CA85E9 /* Line.swift in Sources */,
+				CC55182A1B0A8BD300CA85E9 /* leaderTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,11 +8,15 @@
 
 import UIKit
 import SpriteKit
+import CloudKit
 
 
 class GameViewController: UIViewController {
     var movesLeft = 0
     var score = 0
+    
+    var arrNotes: Array<CKRecord> = []
+
     
     @IBOutlet weak var targetLabel: UILabel!
     @IBOutlet weak var movesLabel: UILabel!
@@ -88,9 +92,104 @@ class GameViewController: UIViewController {
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hideGameEnd")
         view.addGestureRecognizer(tapGestureRecognizer)
         
+        getBoard()
         
+        if arrNotes.count<5{
+            addNewRecord()
+        }
+        else{
+            
+            updateRecords()
+            addNewRecord()
+            
+        }
         
     }
+    
+    
+    func updateRecords(){
+        
+        var min = NSInteger.max
+        var recordid:CKRecordID?
+        
+        for record in arrNotes as [CKRecord]!{
+           let recordScore = record.valueForKey("gameScore") as? NSInteger
+            
+            if recordScore < min{
+                min = recordScore!
+                recordid = record.recordID
+            }
+        }
+        
+        if score >= min && recordid != nil{
+            
+            let container = CKContainer.defaultContainer()
+            let publicDatabase = container.publicCloudDatabase
+            
+            publicDatabase.deleteRecordWithID(recordid, completionHandler: { (recordID, error) -> Void in
+                if error != nil {
+                    println(error)
+                }
+            })
+            
+        }
+        
+    }
+    
+    func addNewRecord(){
+        
+//        let timestampAsString = String(format: "%f", NSDate.timeIntervalSinceReferenceDate())
+//        let timestampParts = timestampAsString.componentsSeparatedByString(".")
+//        
+//        let noteID = CKRecordID(recordName: timestampParts[0])
+        
+        let noteRecord = CKRecord(recordType: "ScoreBoard")
+        
+        noteRecord.setObject(score, forKey: "gameScore")
+        noteRecord.setObject(NSDate(), forKey: "gamePlayedDate")
+        
+        println(noteRecord)
+        
+        let container = CKContainer.defaultContainer()
+        let publicDatabase = container.publicCloudDatabase
+        
+        publicDatabase.saveRecord(noteRecord, completionHandler: { (record, error) -> Void in
+            if (error != nil) {
+                println(error)
+            }
+        })
+
+        
+    }
+    
+    
+    func getBoard(){
+        
+        self.arrNotes = []
+        
+        let container = CKContainer.defaultContainer()
+        let publicDatabase = container.publicCloudDatabase
+        let predicate = NSPredicate(value: true)
+        
+        let query = CKQuery(recordType: "ScoreBoard", predicate: predicate)
+        
+        
+        publicDatabase.performQuery(query, inZoneWithID: nil) { (results, error) -> Void in
+            if error != nil {
+                println(error)
+            }
+            else {
+                println(results)
+                
+                for result in results {
+                    self.arrNotes.append(result as! CKRecord)
+                }
+                
+            }
+        }
+        
+    }
+    
     
     func hideGameEnd() {
         self.view.removeGestureRecognizer(tapGestureRecognizer)
