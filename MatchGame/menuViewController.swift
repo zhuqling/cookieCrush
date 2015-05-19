@@ -25,6 +25,10 @@ class menuViewController: UIViewController {
     
     @IBAction func leaderBoardButton(sender: UIButton) {
         
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("leaderNav") as! UINavigationController
+        
+        self.presentViewController(vc, animated: true, completion: nil)
         
     }
     

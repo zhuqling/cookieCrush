@@ -32,7 +32,6 @@
                                 </state>
                                 <connections>
                                     <action selector="leaderBoardButton:" destination="Fdd-f5-wif" eventType="touchUpInside" id="iHC-em-4WN"/>
-                                    <segue destination="JG2-0Y-bKX" kind="show" identifier="leaderSegue" id="Wts-bU-YgE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5HD-LR-OVr">
@@ -351,7 +350,7 @@
         <!--Navigation Controller-->
         <scene sceneID="zHy-Qn-QPi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JG2-0Y-bKX" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="leaderNav" automaticallyAdjustsScrollViewInsets="NO" id="JG2-0Y-bKX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
