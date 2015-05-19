@@ -17,6 +17,13 @@ class leaderTableViewController: UITableViewController {
         
     }
     
+    @IBAction func exitPressed(sender: UIBarButtonItem) {
+        
+     self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    
     override func viewWillAppear(animated: Bool) {
         self.tableView.reloadData()
     }
