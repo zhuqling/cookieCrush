@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>C05121C6-B825-4755-A342-2657CBE40F45</string>
 	<key>IDESourceControlProjectName</key>
-	<string>MatchGame</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>40FDD7D16656548402BA479147BEED9CB00BC136</key>
 		<string>https://github.com/uchicago-mobi/xiaoyifan-MPCS51032-2015-Spring-Assignment-3.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MatchGame.xcodeproj</string>
+	<string>MatchGame.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>40FDD7D16656548402BA479147BEED9CB00BC136</key>

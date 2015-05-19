@@ -10,33 +10,15 @@ import UIKit
 import CloudKit
 
 class leaderTableViewController: UITableViewController {
-
-    var arrNotes: Array<CKRecord> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-            let container = CKContainer.defaultContainer()
-            let publicDatabase = container.publicCloudDatabase
-            let predicate = NSPredicate(value: true)
-            
-            let query = CKQuery(recordType: "ScoreBoard", predicate: predicate)
-            
-            
-            publicDatabase.performQuery(query, inZoneWithID: nil) { (results, error) -> Void in
-                if error != nil {
-                    println(error)
-                }
-                else {
-                    println(results)
-                    
-                    for result in results {
-                        self.arrNotes.append(result as! CKRecord)
-                    }
-                    
-                }
-            }
+
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,17 +37,19 @@ class leaderTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return arrNotes.count
+        
+        println("there are \(CloudManager.sharedInstance.arrNotes.count) records")
+        return CloudManager.sharedInstance.arrNotes.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("leaderCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("leaderCell", forIndexPath: indexPath) as! leaderCell
 
-        let noteRecord: CKRecord = arrNotes[indexPath.row]
+        let noteRecord: CKRecord = CloudManager.sharedInstance.arrNotes[indexPath.row]
         
-        cell.textLabel?.text = noteRecord.valueForKey("gameScore") as? String
-        cell.detailTextLabel?.text = noteRecord.valueForKey("gamePlayedDate") as? String
+        let score = noteRecord.valueForKey("gameScore") as! NSInteger
+        cell.scoreLabel.text = "\(indexPath.row+1).\(score)"
 
         return cell
     }

@@ -11,45 +11,11 @@ import CloudKit
 
 class menuViewController: UIViewController {
     
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("tableViewdidLoad", object: self)
-        
-        addNewRecord()
-        
-    }
-    
-    
-    func addNewRecord(){
-        
-        //        let timestampAsString = String(format: "%f", NSDate.timeIntervalSinceReferenceDate())
-        //        let timestampParts = timestampAsString.componentsSeparatedByString(".")
-        //
-        //        let noteID = CKRecordID(recordName: timestampParts[0])
-        
-        let noteRecord = CKRecord(recordType: "ScoreBoard")
-        let score = 1200
-        noteRecord.setObject(score, forKey: "gameScore")
-        noteRecord.setObject(NSDate(), forKey: "gamePlayedDate")
-        
-        println(noteRecord)
-        
-        let container = CKContainer.defaultContainer()
-        println(container)
-        let publicDatabase = container.publicCloudDatabase
-        println(publicDatabase)
-        
-        publicDatabase.saveRecord(noteRecord, completionHandler: { (record, error) -> Void in
-            if (error != nil) {
-                println(error)
-            }
-        })
-        
-        
+        CloudManager.sharedInstance.getData()
     }
     
     @IBAction func startButton(sender: UIButton) {
@@ -64,5 +30,6 @@ class menuViewController: UIViewController {
     
     
     @IBOutlet weak var instructionsButton: UIButton!
+    
 
 }

@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGB-nQ-QlS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGB-nQ-QlS">
                                 <rect key="frame" x="228" y="60" width="144" height="40"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,7 +32,7 @@
                                 </state>
                                 <connections>
                                     <action selector="leaderBoardButton:" destination="Fdd-f5-wif" eventType="touchUpInside" id="iHC-em-4WN"/>
-                                    <segue destination="JG2-0Y-bKX" kind="show" id="Wts-bU-YgE"/>
+                                    <segue destination="JG2-0Y-bKX" kind="show" identifier="leaderSegue" id="Wts-bU-YgE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5HD-LR-OVr">
@@ -55,7 +55,7 @@
                                 </state>
                                 <connections>
                                     <action selector="startButton:" destination="Fdd-f5-wif" eventType="touchUpInside" id="lBo-z5-ARA"/>
-                                    <segue destination="LVB-YS-i5n" kind="show" id="25A-oz-OrX"/>
+                                    <segue destination="LVB-YS-i5n" kind="show" identifier="gameSegue" id="25A-oz-OrX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -84,30 +84,35 @@
         <scene sceneID="JN3-F2-0hn">
             <objects>
                 <tableViewController id="n1A-Dk-QDh" customClass="leaderTableViewController" customModule="MatchGame" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gvu-q7-VVw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gvu-q7-VVw">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.19890207700000001" green="0.30355816540000002" blue="0.58676609850000006" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.19890207700000001" green="0.30355816540000002" blue="0.58676609850000006" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="leaderCell" textLabel="pMO-j1-hci" detailTextLabel="97O-6r-Rx5" style="IBUITableViewCellStyleSubtitle" id="ImT-dT-jmD">
+                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="leaderCell" rowHeight="200" id="ImT-dT-jmD" customClass="leaderCell" customModule="MatchGame" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImT-dT-jmD" id="KbC-U7-uKR">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pMO-j1-hci">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="97O-6r-Rx5">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FfX-Ri-3dd">
+                                            <rect key="frame" x="20" y="20" width="560" height="159"/>
+                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="30"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="FfX-Ri-3dd" secondAttribute="trailing" constant="20" id="FIF-T9-1ee"/>
+                                        <constraint firstAttribute="bottom" secondItem="FfX-Ri-3dd" secondAttribute="bottom" constant="20" id="Tdy-gH-J2T"/>
+                                        <constraint firstItem="FfX-Ri-3dd" firstAttribute="leading" secondItem="KbC-U7-uKR" secondAttribute="leading" constant="20" id="o5C-nd-7yy"/>
+                                        <constraint firstItem="FfX-Ri-3dd" firstAttribute="top" secondItem="KbC-U7-uKR" secondAttribute="top" constant="20" id="oE0-Oz-UyS"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.19890207700000001" green="0.30355816540000002" blue="0.58676609850000006" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="scoreLabel" destination="FfX-Ri-3dd" id="Nzg-fx-th6"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -116,6 +121,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Leader Board" id="hHi-EY-qTe"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U2b-ju-Jva" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -348,6 +354,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JG2-0Y-bKX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="lFR-xb-0ta">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

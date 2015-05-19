@@ -38,6 +38,8 @@
 		CCDC03091B0575E8004CD7A8 /* Ka-Ching.wav in Resources */ = {isa = PBXBuildFile; fileRef = CCDC03031B0575E8004CD7A8 /* Ka-Ching.wav */; };
 		CCDC030A1B0575E8004CD7A8 /* Mining by Moonlight.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CCDC03041B0575E8004CD7A8 /* Mining by Moonlight.mp3 */; };
 		CCDC030B1B0575E8004CD7A8 /* Scrape.wav in Resources */ = {isa = PBXBuildFile; fileRef = CCDC03051B0575E8004CD7A8 /* Scrape.wav */; };
+		CCF62B9D1B0AAF6800292603 /* leaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF62B9C1B0AAF6800292603 /* leaderCell.swift */; };
+		CCF62B9F1B0ABDC400292603 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF62B9E1B0ABDC400292603 /* CloudManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		CCDC03031B0575E8004CD7A8 /* Ka-Ching.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ka-Ching.wav"; sourceTree = "<group>"; };
 		CCDC03041B0575E8004CD7A8 /* Mining by Moonlight.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mining by Moonlight.mp3"; sourceTree = "<group>"; };
 		CCDC03051B0575E8004CD7A8 /* Scrape.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Scrape.wav; sourceTree = "<group>"; };
+		CCF62B9C1B0AAF6800292603 /* leaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = leaderCell.swift; sourceTree = "<group>"; };
+		CCF62B9E1B0ABDC400292603 /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 				CCBDFF231B06ADE2005DE640 /* MatchGame.entitlements */,
 				CCDC02C21B053BE0004CD7A8 /* AppDelegate.swift */,
 				CCDC02C61B053BE0004CD7A8 /* GameScene.swift */,
+				CCF62B9E1B0ABDC400292603 /* CloudManager.swift */,
 				CCDC02C81B053BE0004CD7A8 /* GameViewController.swift */,
 				CC5518211B0A342400CA85E9 /* Line.swift */,
 				CC5518291B0A8BD300CA85E9 /* leaderTableViewController.swift */,
@@ -144,6 +149,7 @@
 				CC5518251B0A6A2700CA85E9 /* menuViewController.swift */,
 				CCDC02F91B056109004CD7A8 /* Tile.swift */,
 				CCDC02E81B054BBA004CD7A8 /* Cookie.swift */,
+				CCF62B9C1B0AAF6800292603 /* leaderCell.swift */,
 				CCDC02CA1B053BE0004CD7A8 /* Main.storyboard */,
 				CCDC02CD1B053BE0004CD7A8 /* Images.xcassets */,
 				CCDC02E61B053C36004CD7A8 /* Sprites.atlas */,
@@ -325,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCF62B9F1B0ABDC400292603 /* CloudManager.swift in Sources */,
 				CC5518281B0A723700CA85E9 /* instructionController.swift in Sources */,
 				CCDC02ED1B0554CE004CD7A8 /* Level.swift in Sources */,
 				CCDC02C71B053BE0004CD7A8 /* GameScene.swift in Sources */,
@@ -335,6 +342,7 @@
 				CCDC02C91B053BE0004CD7A8 /* GameViewController.swift in Sources */,
 				CCDC02C31B053BE0004CD7A8 /* AppDelegate.swift in Sources */,
 				CCDC02EB1B05534B004CD7A8 /* Array2D.swift in Sources */,
+				CCF62B9D1B0AAF6800292603 /* leaderCell.swift in Sources */,
 				CCDC02FE1B056846004CD7A8 /* Swap.swift in Sources */,
 				CC5518221B0A342400CA85E9 /* Line.swift in Sources */,
 				CC55182A1B0A8BD300CA85E9 /* leaderTableViewController.swift in Sources */,

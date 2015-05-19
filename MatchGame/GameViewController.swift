@@ -15,9 +15,6 @@ class GameViewController: UIViewController {
     var movesLeft = 0
     var score = 0
     
-    var arrNotes: Array<CKRecord> = []
-
-    
     @IBOutlet weak var targetLabel: UILabel!
     @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -92,9 +89,7 @@ class GameViewController: UIViewController {
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hideGameEnd")
         view.addGestureRecognizer(tapGestureRecognizer)
         
-        getBoard()
-        
-        if arrNotes.count<5{
+        if CloudManager.sharedInstance.arrNotes.count<5{
             addNewRecord()
         }
         else{
@@ -112,7 +107,7 @@ class GameViewController: UIViewController {
         var min = NSInteger.max
         var recordid:CKRecordID?
         
-        for record in arrNotes as [CKRecord]!{
+        for record in CloudManager.sharedInstance.arrNotes as [CKRecord]!{
            let recordScore = record.valueForKey("gameScore") as? NSInteger
             
             if recordScore < min{
@@ -138,17 +133,11 @@ class GameViewController: UIViewController {
     
     func addNewRecord(){
         
-//        let timestampAsString = String(format: "%f", NSDate.timeIntervalSinceReferenceDate())
-//        let timestampParts = timestampAsString.componentsSeparatedByString(".")
-//        
-//        let noteID = CKRecordID(recordName: timestampParts[0])
-        
         let noteRecord = CKRecord(recordType: "ScoreBoard")
         
         noteRecord.setObject(score, forKey: "gameScore")
         noteRecord.setObject(NSDate(), forKey: "gamePlayedDate")
         
-        println(noteRecord)
         
         let container = CKContainer.defaultContainer()
         let publicDatabase = container.publicCloudDatabase
@@ -157,36 +146,11 @@ class GameViewController: UIViewController {
             if (error != nil) {
                 println(error)
             }
+            else{
+                CloudManager.sharedInstance.arrNotes.append(noteRecord)
+            }
         })
 
-        
-    }
-    
-    
-    func getBoard(){
-        
-        self.arrNotes = []
-        
-        let container = CKContainer.defaultContainer()
-        let publicDatabase = container.publicCloudDatabase
-        let predicate = NSPredicate(value: true)
-        
-        let query = CKQuery(recordType: "ScoreBoard", predicate: predicate)
-        
-        
-        publicDatabase.performQuery(query, inZoneWithID: nil) { (results, error) -> Void in
-            if error != nil {
-                println(error)
-            }
-            else {
-                println(results)
-                
-                for result in results {
-                    self.arrNotes.append(result as! CKRecord)
-                }
-                
-            }
-        }
         
     }
     

@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func removeSplashView(){
         
-        UIView.animateWithDuration(2.0,
+        UIView.animateWithDuration(0.1,
             animations: {self.splash!.alpha = 0.0},
             completion: {
                 (value: Bool) in
