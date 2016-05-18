@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Yifan Xiao. All rights reserved.
 //
 
-class Line: Hashable, Printable {
+class Line: Hashable, CustomStringConvertible {
     var cookies = [Cookie]()
     
     var points = 0
     
-    enum LineType: Printable {
+    enum LineType: CustomStringConvertible {
         case Horizontal
         case Vertical
         
@@ -50,7 +50,7 @@ class Line: Hashable, Printable {
     }
     
     var hashValue: Int {
-        return reduce(cookies, 0) { $0.hashValue ^ $1.hashValue }
+        return cookies.reduce(0, combine:{ $0.hashValue ^ $1.hashValue })
     }
 }
 

@@ -28,19 +28,17 @@ class CloudManager: NSObject {
         query.sortDescriptors = [scoreSort]
     
         publicDatabase.performQuery(query, inZoneWithID: nil) { (results, error) -> Void in
-                if error != nil {
-                println(error)
+            if error != nil {
+                print(error)
             }
             else {
-                    println(results)
+                print(results)
     
-                        for result in results {
-                            self.arrNotes.append(result as! CKRecord)
-                        }
-    
-    NSNotificationCenter.defaultCenter().postNotificationName("tableViewdidLoad", object: self)
-    
+                for result in results! {
+                    self.arrNotes.append(result as! CKRecord)
                 }
+            }
+        NSNotificationCenter.defaultCenter().postNotificationName("tableViewdidLoad", object: self)
         }
     }
     

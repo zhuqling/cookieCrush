@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let center = NSNotificationCenter.defaultCenter()
-        center.addObserver(self, selector: "removeSplashView", name: "tableViewdidLoad", object: nil)
+        center.addObserver(self, selector: #selector(AppDelegate.removeSplashView), name: "tableViewdidLoad", object: nil)
         
         splash = UIImageView(frame: self.window!.bounds)
         splash!.backgroundColor = UIColor.whiteColor()

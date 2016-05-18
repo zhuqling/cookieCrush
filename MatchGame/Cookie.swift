@@ -10,7 +10,7 @@ import SpriteKit
 
 
 //The objects that you put into the set must conform to the Hashable protocol
-class Cookie :Printable, Hashable {
+class Cookie :CustomStringConvertible, Hashable {
     var column: Int
     var row: Int
     let cookieType: CookieType
@@ -39,7 +39,7 @@ func ==(lhs: Cookie, rhs: Cookie) -> Bool {
     return lhs.column == rhs.column && lhs.row == rhs.row
 }
 
-enum CookieType: Int, Printable {
+enum CookieType: Int, CustomStringConvertible {
     case Unknown = 0, Croissant, Cupcake, Danish, Donut, Macaroon, SugarCookie
     
     var spriteName: String {

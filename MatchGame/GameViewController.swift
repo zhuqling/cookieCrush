@@ -40,7 +40,7 @@ class GameViewController: UIViewController {
         
             scene = GameScene(size: skView.bounds.size)
             scene.scaleMode = .AspectFill
-            println("the scene \(scene.size.width), and \(scene.size.height)")
+            print("the scene \(scene.size.width), and \(scene.size.height)")
         
             level = Level(filename: "Level_1")
             scene.level = level
@@ -121,9 +121,9 @@ class GameViewController: UIViewController {
             let container = CKContainer.defaultContainer()
             let publicDatabase = container.publicCloudDatabase
             
-            publicDatabase.deleteRecordWithID(recordid, completionHandler: { (recordID, error) -> Void in
+            publicDatabase.deleteRecordWithID(recordid!, completionHandler: { (recordID, error) -> Void in
                 if error != nil {
-                    println(error)
+                    print(error)
                 }
             })
             
@@ -144,7 +144,7 @@ class GameViewController: UIViewController {
         
         publicDatabase.saveRecord(noteRecord, completionHandler: { (record, error) -> Void in
             if (error != nil) {
-                println(error)
+                print(error)
             }
             else{
                 CloudManager.sharedInstance.arrNotes.append(noteRecord)
@@ -174,11 +174,15 @@ class GameViewController: UIViewController {
     override func shouldAutorotate() -> Bool {
         return true
     }
-
-    override func supportedInterfaceOrientations() -> Int {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
-       
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.AllButUpsideDown
     }
+
+//    override func supportedInterfaceOrientations() -> Int {
+//            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+//       
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

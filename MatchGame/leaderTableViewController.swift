@@ -45,7 +45,7 @@ class leaderTableViewController: UITableViewController {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         
-        println("there are \(CloudManager.sharedInstance.arrNotes.count) records")
+        print("there are \(CloudManager.sharedInstance.arrNotes.count) records")
         return CloudManager.sharedInstance.arrNotes.count
     }
 

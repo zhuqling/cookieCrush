@@ -43,7 +43,7 @@ class GameScene: SKScene {
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         let background = SKSpriteNode(imageNamed: "Background")
-        println("node size \(background.size.width), and \(background.size.height)")
+        print("node size \(background.size.width), and \(background.size.height)")
         addChild(background)
         
         addChild(gameLayer)
@@ -92,12 +92,10 @@ class GameScene: SKScene {
         }
     }
     
-    
 //#pragma-mark gesture recognition
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // 1
-        let touch = touches.first as! UITouch
+        let touch = touches.first!
         let location = touch.locationInNode(cookiesLayer)
         // 2
         let (success, column, row) = convertPoint(location)
@@ -123,12 +121,12 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // 1
         if swipeFromColumn == nil { return }
         
         // 2
-        let touch = touches.first as! UITouch
+        let touch = touches.first!
         let location = touch.locationInNode(cookiesLayer)
         
         let (success, column, row) = convertPoint(location)
@@ -157,7 +155,7 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         swipeFromColumn = nil
         swipeFromRow = nil
         
@@ -166,8 +164,8 @@ class GameScene: SKScene {
         }//handles the tap gesture
     }
     
-    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent) {
-        touchesEnded(touches, withEvent: event)
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        touchesEnded(touches!, withEvent: event)
     }
     
     
@@ -282,7 +280,7 @@ class GameScene: SKScene {
         // 1
         var longestDuration: NSTimeInterval = 0
         for array in columns {
-            for (idx, cookie) in enumerate(array) {
+            for (idx, cookie) in array.enumerate() {
                 let newPosition = pointForColumn(cookie.column, row: cookie.row)
                 // 2
                 let delay = 0.05 + 0.15*NSTimeInterval(idx)
@@ -312,7 +310,7 @@ class GameScene: SKScene {
             // 2
             let startRow = array[0].row + 1
             
-            for (idx, cookie) in enumerate(array) {
+            for (idx, cookie) in array.enumerate() {
                 // 3
                 let sprite = SKSpriteNode(imageNamed: cookie.cookieType.spriteName)
                 sprite.position = pointForColumn(cookie.column, row: startRow)

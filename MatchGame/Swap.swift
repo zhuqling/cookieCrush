@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Yifan Xiao. All rights reserved.
 //
 
-struct Swap: Printable, Hashable{
+struct Swap: CustomStringConvertible, Hashable{
     let cookieA: Cookie
     let cookieB: Cookie
     
