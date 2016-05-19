@@ -1,8 +1,15 @@
+//
+//  Line.swift
+//  MatchGame
+//
+//  Created by Yifan Xiao on 5/18/15.
+//  Copyright (c) 2015 Yifan Xiao. All rights reserved.
+//
 
 class Line: Hashable, CustomStringConvertible {
     var cookies = [Cookie]()
     
-    var points = 0 // 分数
+    var points = 0
     
     enum LineType: CustomStringConvertible {
         case Horizontal

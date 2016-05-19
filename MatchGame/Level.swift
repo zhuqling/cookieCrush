@@ -1,92 +1,104 @@
-//
-//  Level.swift
-//  MatchGame
-//
-//  Created by Yifan Xiao on 5/14/15.
-//  Copyright (c) 2015 Yifan Xiao. All rights reserved.
-//
+/*
+ * 关卡
+ */
 
 import Foundation
 
-let NumColumns = 9
-let NumRows = 9
-
 class Level {
+    var NumColumns = 9 // 列数
+    var NumRows = 9 // 行数
     
-    var targetScore = 0
-    var maximumMoves = 0
+    var targetScore = 0 // 目标分
+    var maximumMoves = 0 // 步数
+    var comboMultiplier = 0 // 连击
     
-    
-    private var cookies = Array2D<Cookie>(columns: NumColumns, rows: NumRows)
-    
-    private var tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows)
+    private var cookies: Array2D<Cookie>!
+    private var tiles: Array2D<Tile>!
     
     private var possibleSwaps = Set<Swap>()
     
+    // 从关卡文件加载
     init(filename: String) {
-        // 1
         if let dictionary = Dictionary<String, AnyObject>.loadJSONFromBundle(filename) {
-            // 2
             if let tilesArray: AnyObject = dictionary["tiles"]
             {
-                    // 3
-                    for (row, rowArray) in (tilesArray as! [[Int]]).enumerate() {
-                        // 4
-                        let tileRow = NumRows - row - 1
-                        // 5
-                        for (column, value) in rowArray.enumerate() {
-                            if value == 1 {
-                                tiles[column, tileRow] = Tile()
-                            }
-                        }
-                    }
-                
                 targetScore = dictionary["targetScore"] as! Int
                 maximumMoves = dictionary["moves"] as! Int
                 
+                if let col = dictionary["col"] as! Int? {
+                    NumColumns = col
+                }
                 
+                if let row = dictionary["row"] as! Int? {
+                    NumRows = row
+                }
+                
+                cookies = Array2D<Cookie>(columns: NumColumns, rows: NumRows)
+                tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows)
+                
+                for (rowIdx, rowArray) in (tilesArray as! [[Int]]).enumerate() {
+                    let row = NumRows - rowIdx - 1 // 关卡的上下方向与存储结构是颠倒的，因为坐标系的问题
+                    for (column, value) in rowArray.enumerate() {
+                        if value == 1 { // 被占位代表可用位置
+                            tiles[column, row] = Tile()
+                        }
+                    }
+                }
             }
         }
     }
     
+    // 按坐标访问贴砖
+    func tileAtColumn(column: Int, row: Int) -> Tile? {
+        assert(column >= 0 && column < NumColumns)
+        assert(row >= 0 && row < NumRows)
+        return tiles[column, row]
+    }
     
-    //the return type is optional, because not all of the grids are filled with cookies
+    // 按坐标访问元素
     func cookieAtColumn(column: Int, row: Int) -> Cookie? {
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
+        
         return cookies[column, row]
     }
     
-    
+    // 随机
     func shuffle() -> Set<Cookie> {
         var set: Set<Cookie>
         repeat {
             set = createInitialCookies()
             detectPossibleSwaps()
-            print("possible swaps: \(possibleSwaps)")
-        }
-            while possibleSwaps.count == 0
+//            print("possible swaps: \(possibleSwaps)")
+        } while possibleSwaps.count == 0
         
         return set
     }
     
-    
+    // 创建初始元素
     private func createInitialCookies() -> Set<Cookie> {
         var set = Set<Cookie>()
         
-        // 1
         for row in 0..<NumRows {
             for column in 0..<NumColumns {
-                
                 if tiles[column, row] != nil
                 {
-                    // 2
-                    let cookieType = CookieType.random()
-                    // 3
+                    // 避免初始元素时已经匹配
+                    var cookieType: CookieType!
+                    repeat {
+                        cookieType = CookieType.random()
+                    } while (
+                        (column >= 2 &&
+                            cookies[column - 1, row] != nil && cookies[column - 1, row]!.cookieType == cookieType &&
+                            cookies[column - 2, row] != nil && cookies[column - 2, row]!.cookieType == cookieType) ||
+                        (row >= 2 &&
+                            cookies[column, row - 1] != nil && cookies[column, row - 1]!.cookieType == cookieType &&
+                            cookies[column, row - 2] != nil && cookies[column, row - 2]!.cookieType == cookieType)
+                    )
+                    
                     let cookie = Cookie(column: column, row: row, cookieType: cookieType)
                     cookies[column, row] = cookie
                     
-                    // 4
                     set.insert(cookie)
                 }
             }
@@ -94,54 +106,45 @@ class Level {
         return set
     }
     
-    
+    // 检测交换是否成立，是否满足横向/纵向的匹配
     func detectPossibleSwaps() {
         var set = Set<Swap>()
         
         for row in 0..<NumRows {
             for column in 0..<NumColumns {
                 if let cookie = cookies[column, row] {
-                    
-                    // TODO: detection logic goes here
-                    // Is it possible to swap this cookie with the one on the right?
-                    if column < NumColumns - 1 {
-                        // Have a cookie in this spot? If there is no tile, there is no cookie.
+                    if column < NumColumns - 1 { // 总是尝试与右边一个进行交换
                         if let other = cookies[column + 1, row] {
-                            // Swap them
+                            // 尝试交换
                             cookies[column, row] = other
                             cookies[column + 1, row] = cookie
                             
-                            // Is either cookie now part of a line?
+                            // 检测是否有匹配
                             if hasLineAtColumn(column + 1, row: row) ||
-                                hasLineAtColumn(column, row: row) {
-                                    set.insert(Swap(cookieA: cookie, cookieB: other))
+                               hasLineAtColumn(column, row: row) {
+                                set.insert(Swap(cookieA: cookie, cookieB: other))
                             }
                             
-                            // Swap them back
+                            // 恢复原位
                             cookies[column, row] = cookie
                             cookies[column + 1, row] = other
                         }
                     }
                     
-                    if row < NumRows - 1 {
+                    if row < NumRows - 1 { // 总是尝试与上边一个进行交换
                         if let other = cookies[column, row + 1] {
                             cookies[column, row] = other
                             cookies[column, row + 1] = cookie
                             
-                            // Is either cookie now part of a line?
                             if hasLineAtColumn(column, row: row + 1) ||
-                                hasLineAtColumn(column, row: row) {
-                                    set.insert(Swap(cookieA: cookie, cookieB: other))
+                               hasLineAtColumn(column, row: row) {
+                                set.insert(Swap(cookieA: cookie, cookieB: other))
                             }
                             
-                            // Swap them back
                             cookies[column, row] = cookie
                             cookies[column, row + 1] = other
                         }
                     }
-                    
-                    
-                    
                 }
             }
         }
@@ -149,35 +152,54 @@ class Level {
         possibleSwaps = set
     }
     
+    // 检测是否有匹配
     private func hasLineAtColumn(column: Int, row: Int) -> Bool {
         let cookieType = cookies[column, row]!.cookieType
         
         var horzLength = 1
-        for var i = column - 1; i >= 0 && cookies[i, row]?.cookieType == cookieType;
-            --i, ++horzLength { }
-        for var i = column + 1; i < NumColumns && cookies[i, row]?.cookieType == cookieType;
-            ++i, ++horzLength { }
+        for i in (column - 1).stride(to: 0, by: -1) {
+            if cookies[i, row]?.cookieType != cookieType {
+                break
+            }
+            
+            horzLength += 1
+        }
+        
+        for i in (column + 1)..<NumColumns {
+            if cookies[i, row]?.cookieType != cookieType {
+                break
+            }
+            
+            horzLength += 1
+        }
+        
         if horzLength >= 3 { return true }
         
         var vertLength = 1
-        for var i = row - 1; i >= 0 && cookies[column, i]?.cookieType == cookieType;
-            --i, ++vertLength { }
-        for var i = row + 1; i < NumRows && cookies[column, i]?.cookieType == cookieType;
-            ++i, ++vertLength { }
+        for i in (row - 1).stride(to: 0, by: -1) {
+            if cookies[column, i]?.cookieType != cookieType {
+                break
+            }
+            
+            vertLength += 1
+        }
+        
+        for i in (row + 1)..<NumRows {
+            if cookies[column, i]?.cookieType != cookieType {
+                break
+            }
+            
+            vertLength += 1
+        }
+        
         return vertLength >= 3
     }
     
-    
-    func tileAtColumn(column: Int, row: Int) -> Tile? {
-        assert(column >= 0 && column < NumColumns)
-        assert(row >= 0 && row < NumRows)
-        return tiles[column, row]
-    }
-    
-    
+    // 执行交换
     func performSwap(swap: Swap) {
         let columnA = swap.cookieA.column
         let rowA = swap.cookieA.row
+        
         let columnB = swap.cookieB.column
         let rowB = swap.cookieB.row
         
@@ -190,85 +212,84 @@ class Level {
         swap.cookieA.row = rowB
     }
     
+    // 检测交换是否成立
     func isPossibleSwap(swap: Swap) -> Bool {
         return possibleSwaps.contains(swap)
     }
     
+    // 检测横向匹配
     private func detectHorizontalMatches() -> Set<Line> {
-        // 1
         var set = Set<Line>()
-        // 2
+        
         for row in 0..<NumRows {
-            for var column = 0; column < NumColumns - 2 ; {
-                // 3
+            for column in 0..<NumColumns - 2 {
                 if let cookie = cookies[column, row] {
                     let matchType = cookie.cookieType
-                    // 4
+
                     if cookies[column + 1, row]?.cookieType == matchType &&
-                        cookies[column + 2, row]?.cookieType == matchType {
-                            // 5
-                            let line = Line(lineType: .Horizontal)
-                            repeat {
-                                line.addCookie(cookies[column, row]!)
-                                ++column
-                            }
-                                while column < NumColumns && cookies[column, row]?.cookieType == matchType
-                            
-                            set.insert(line)
-                            continue
+                       cookies[column + 2, row]?.cookieType == matchType {
+                        let line = Line(lineType: .Horizontal)
+
+                        var newColumn = column
+                        repeat {
+                            line.addCookie(cookies[newColumn, row]!)
+                            newColumn += 1
+                        } while newColumn < NumColumns && cookies[newColumn, row]?.cookieType == matchType
+                        
+                        set.insert(line)
+                        continue
                     }
                 }
-                // 6
-                ++column
             }
         }
         return set
     }
     
+    // 检测纵向匹配
     private func detectVerticalMatches() -> Set<Line> {
         var set = Set<Line>()
         
         for column in 0..<NumColumns {
-            for var row = 0; row < NumRows - 2; {
+            for row in 0..<NumRows - 2 {
                 if let cookie = cookies[column, row] {
                     let matchType = cookie.cookieType
                     
                     if cookies[column, row + 1]?.cookieType == matchType &&
-                        cookies[column, row + 2]?.cookieType == matchType {
-                            
-                            let line = Line(lineType: .Vertical)
-                            repeat {
-                                line.addCookie(cookies[column, row]!)
-                                ++row
-                            }
-                                while row < NumRows && cookies[column, row]?.cookieType == matchType
-                            
-                            set.insert(line)
-                            continue
+                       cookies[column, row + 2]?.cookieType == matchType {
+                        let line = Line(lineType: .Vertical)
+                        
+                        var newRow = row
+                        repeat {
+                            line.addCookie(cookies[column, newRow]!)
+                            newRow += 1
+                        } while newRow < NumRows && cookies[column, newRow]?.cookieType == matchType
+                        
+                        set.insert(line)
+                        continue
                     }
                 }
-                ++row
             }
         }
         return set
     }
     
+    // 移除匹配
     func removeMatches() -> Set<Line> {
         let horizontalLines = detectHorizontalMatches()
         let verticalLines = detectVerticalMatches()
         
-        print("Horizontal matches: \(horizontalLines)")
-        print("Vertical matches: \(verticalLines)")
-        
+        // 先清除数据
         removeCookies(horizontalLines)
         removeCookies(verticalLines)
         
+        // 计分
         calculateScores(horizontalLines)
         calculateScores(verticalLines)
         
         return horizontalLines.union(verticalLines)
     }
     
+    // 移除元素（数据模型）
     private func removeCookies(lines: Set<Line>) {
         for line in lines {
             for cookie in line.cookies {
@@ -277,33 +298,27 @@ class Level {
         }
     }
     
-    
-    
-    //add this method to fill the empty tiles after dismiss the matched cookies
+    // 填充空洞（数据模型），用于移除匹配后自动将上面的元素移下，并填充新的元素
     func fillHoles() -> [[Cookie]] {
         var columns = [[Cookie]]()
-        // 1
+
         for column in 0..<NumColumns {
             var array = [Cookie]()
             for row in 0..<NumRows {
-                // 2
-                if tiles[column, row] != nil && cookies[column, row] == nil {
-                    // 3
+                if tiles[column, row] != nil && cookies[column, row] == nil { // 地图有占位并且元素结构未占位
                     for lookup in (row + 1)..<NumRows {
-                        if let cookie = cookies[column, lookup] {
-                            // 4
+                        if let cookie = cookies[column, lookup] { // 交换上一行到空缺的位置
                             cookies[column, lookup] = nil
                             cookies[column, row] = cookie
                             cookie.row = row
-                            // 5
+
                             array.append(cookie)
-                            // 6
                             break
                         }
                     }
                 }
             }
-            // 7
+            
             if !array.isEmpty {
                 columns.append(array)
             }
@@ -311,30 +326,34 @@ class Level {
         return columns
     }
     
-    //this method is used add new cookies when the old ones are dismissed
+    // 从上面添加新元素
     func topUpCookies() -> [[Cookie]] {
         var columns = [[Cookie]]()
-        var cookieType: CookieType = .Unknown
+        var cookieType: CookieType = .Unknown // 最后一个元素类型，用于避免生成重复元素
         
         for column in 0..<NumColumns {
             var array = [Cookie]()
-            // 1
-            for var row = NumRows - 1; row >= 0 && cookies[column, row] == nil; --row {
-                // 2
+            
+            for row in (NumRows-1).stride(to: 0, by: -1) { // 从上往下
+                if cookies[column, row] != nil { // 当遇到不为空的位置时说明全部都满了
+                    break
+                }
+
                 if tiles[column, row] != nil {
-                    // 3
                     var newCookieType: CookieType
+                    
                     repeat {
                         newCookieType = CookieType.random()
                     } while newCookieType == cookieType
+                    
                     cookieType = newCookieType
-                    // 4
+
                     let cookie = Cookie(column: column, row: row, cookieType: cookieType)
                     cookies[column, row] = cookie
                     array.append(cookie)
                 }
             }
-            // 5
+            
             if !array.isEmpty {
                 columns.append(array)
             }
@@ -342,14 +361,18 @@ class Level {
         return columns
     }
     
-    
-    //calculate the score
+    // 计分
     func calculateScores(chains: Set<Line>) {
         // 3-chain is 60 pts, 4-chain is 120, 5-chain is 180, and so on
         for chain in chains {
-            chain.points = 60 * (chain.length - 2)
+            chain.points = 60 * (chain.length - 2) * comboMultiplier
+            comboMultiplier += 1
         }
     }
     
+    // 复位连击
+    func resetComboMultiplier(){
+        comboMultiplier = 1
+    }
 }
 

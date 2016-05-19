@@ -1,21 +1,15 @@
-//
-//  Cookie.swift
-//  MatchGame
-//
-//  Created by Yifan Xiao on 5/14/15.
-//  Copyright (c) 2015 Yifan Xiao. All rights reserved.
-//
+/*
+ * 元素
+ */
 
 import SpriteKit
 
-
-//The objects that you put into the set must conform to the Hashable protocol
-class Cookie :CustomStringConvertible, Hashable {
+// The objects that you put into the set must conform to the Hashable protocol
+class Cookie : CustomStringConvertible, Hashable {
     var column: Int
     var row: Int
     let cookieType: CookieType
-    var sprite: SKSpriteNode?
-    //for the grid at (column, row), the sprite may not there
+    var sprite: SKSpriteNode? // for the grid at (column, row), the sprite may not there
     
     init(column: Int, row: Int, cookieType: CookieType) {
         self.column = column
@@ -41,6 +35,12 @@ func ==(lhs: Cookie, rhs: Cookie) -> Bool {
 
 enum CookieType: Int, CustomStringConvertible {
     case Unknown = 0, Croissant, Cupcake, Danish, Donut, Macaroon, SugarCookie
+    case Length
+    
+    // 总数
+    static var number: UInt32 {
+        return UInt32(Length.rawValue)-1
+    }
     
     var spriteName: String {
         let spriteNames = [
@@ -58,8 +58,9 @@ enum CookieType: Int, CustomStringConvertible {
         return spriteName + "-Highlighted"
     }
     
+    // 随机
     static func random() -> CookieType {
-        return CookieType(rawValue: Int(arc4random_uniform(6)) + 1)!
+        return CookieType(rawValue: Int(arc4random_uniform(number)) + 1)!
         //the returned index is 1----6
     }
     
