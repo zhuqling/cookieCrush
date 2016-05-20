@@ -17,6 +17,8 @@ class Level {
     
     private var possibleSwaps = Set<Swap>()
     
+    // MARK: - init
+    
     // 从关卡文件加载
     init(filename: String) {
         if let dictionary = Dictionary<String, AnyObject>.loadJSONFromBundle(filename) {
@@ -47,6 +49,8 @@ class Level {
             }
         }
     }
+    
+    // MARK: - util
     
     // 按坐标访问贴砖
     func tileAtColumn(column: Int, row: Int) -> Tile? {
@@ -157,7 +161,7 @@ class Level {
         let cookieType = cookies[column, row]!.cookieType
         
         var horzLength = 1
-        for i in (column - 1).stride(to: 0, by: -1) {
+        for i in (column - 1).stride(through: 0, by: -1) {
             if cookies[i, row]?.cookieType != cookieType {
                 break
             }
@@ -176,7 +180,7 @@ class Level {
         if horzLength >= 3 { return true }
         
         var vertLength = 1
-        for i in (row - 1).stride(to: 0, by: -1) {
+        for i in (row - 1).stride(through: 0, by: -1) {
             if cookies[column, i]?.cookieType != cookieType {
                 break
             }
@@ -334,7 +338,7 @@ class Level {
         for column in 0..<NumColumns {
             var array = [Cookie]()
             
-            for row in (NumRows-1).stride(to: 0, by: -1) { // 从上往下
+            for row in (NumRows-1).stride(through: 0, by: -1) { // 从上往下
                 if cookies[column, row] != nil { // 当遇到不为空的位置时说明全部都满了
                     break
                 }

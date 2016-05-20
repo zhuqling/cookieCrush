@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72419D5F1CEDA16D00E2A5E8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72419D5E1CEDA16C00E2A5E8 /* AVFoundation.framework */; };
+		72419D611CEDA2B300E2A5E8 /* Grid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 72419D601CEDA2B300E2A5E8 /* Grid.atlas */; };
+		72419D631CEDB30500E2A5E8 /* Level_5.json in Resources */ = {isa = PBXBuildFile; fileRef = 72419D621CEDB30500E2A5E8 /* Level_5.json */; };
 		CC5518221B0A342400CA85E9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518211B0A342400CA85E9 /* Line.swift */; };
 		CC5518241B0A5DBC00CA85E9 /* cookie.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5518231B0A5DBC00CA85E9 /* cookie.png */; };
 		CC5518261B0A6A2700CA85E9 /* menuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518251B0A6A2700CA85E9 /* menuViewController.swift */; };
@@ -53,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		72419D5E1CEDA16C00E2A5E8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		72419D601CEDA2B300E2A5E8 /* Grid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Grid.atlas; sourceTree = "<group>"; };
+		72419D621CEDB30500E2A5E8 /* Level_5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_5.json; sourceTree = "<group>"; };
 		CC5518211B0A342400CA85E9 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		CC5518231B0A5DBC00CA85E9 /* cookie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookie.png; sourceTree = "<group>"; };
 		CC5518251B0A6A2700CA85E9 /* menuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72419D5F1CEDA16D00E2A5E8 /* AVFoundation.framework in Frameworks */,
 				CCBDFF251B06ADE8005DE640 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +122,7 @@
 		CCDC02B41B053BE0004CD7A8 = {
 			isa = PBXGroup;
 			children = (
+				72419D5E1CEDA16C00E2A5E8 /* AVFoundation.framework */,
 				CCBDFF241B06ADE8005DE640 /* CloudKit.framework */,
 				CCDC02BF1B053BE0004CD7A8 /* MatchGame */,
 				CCDC02D91B053BE0004CD7A8 /* MatchGameTests */,
@@ -150,12 +158,11 @@
 				CCDC02F91B056109004CD7A8 /* Tile.swift */,
 				CCDC02E81B054BBA004CD7A8 /* Cookie.swift */,
 				CCF62B9C1B0AAF6800292603 /* leaderCell.swift */,
-				CCDC02CA1B053BE0004CD7A8 /* Main.storyboard */,
 				CCDC02CD1B053BE0004CD7A8 /* Images.xcassets */,
+				72419D601CEDA2B300E2A5E8 /* Grid.atlas */,
 				CCDC02E61B053C36004CD7A8 /* Sprites.atlas */,
 				CCDC02FF1B0575E8004CD7A8 /* Sounds */,
 				CCDC02EE1B055DF6004CD7A8 /* Levels */,
-				CCDC02CF1B053BE0004CD7A8 /* LaunchScreen.xib */,
 				CCDC02C01B053BE0004CD7A8 /* Supporting Files */,
 			);
 			path = MatchGame;
@@ -164,6 +171,8 @@
 		CCDC02C01B053BE0004CD7A8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CCDC02CA1B053BE0004CD7A8 /* Main.storyboard */,
+				CCDC02CF1B053BE0004CD7A8 /* LaunchScreen.xib */,
 				CC5518231B0A5DBC00CA85E9 /* cookie.png */,
 				CCDC02C11B053BE0004CD7A8 /* Info.plist */,
 			);
@@ -195,6 +204,7 @@
 				CCDC02F11B055DF6004CD7A8 /* Level_2.json */,
 				CCDC02F21B055DF6004CD7A8 /* Level_3.json */,
 				CCDC02F31B055DF6004CD7A8 /* Level_4.json */,
+				72419D621CEDB30500E2A5E8 /* Level_5.json */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -301,6 +311,7 @@
 			files = (
 				CCDC02D11B053BE0004CD7A8 /* LaunchScreen.xib in Resources */,
 				CCDC03071B0575E8004CD7A8 /* Drip.wav in Resources */,
+				72419D611CEDA2B300E2A5E8 /* Grid.atlas in Resources */,
 				CCDC02F81B055DF6004CD7A8 /* Level_4.json in Resources */,
 				CCDC03081B0575E8004CD7A8 /* Error.wav in Resources */,
 				CCDC02F61B055DF6004CD7A8 /* Level_2.json in Resources */,
@@ -308,6 +319,7 @@
 				CCDC02F41B055DF6004CD7A8 /* Level_0.json in Resources */,
 				CC5518241B0A5DBC00CA85E9 /* cookie.png in Resources */,
 				CCDC03061B0575E8004CD7A8 /* Chomp.wav in Resources */,
+				72419D631CEDB30500E2A5E8 /* Level_5.json in Resources */,
 				CCDC030A1B0575E8004CD7A8 /* Mining by Moonlight.mp3 in Resources */,
 				CCDC02CE1B053BE0004CD7A8 /* Images.xcassets in Resources */,
 				CCDC03091B0575E8004CD7A8 /* Ka-Ching.wav in Resources */,

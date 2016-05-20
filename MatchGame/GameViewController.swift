@@ -63,7 +63,7 @@ class GameViewController: UIViewController {
     
     @IBAction func shuffleButtonTapped(sender: UIButton) {
         shuffle()
-        decrementMoves()
+        decrementMoves() // 减少步数
     }
     
     @IBAction func menuButtonTapped(sender: UIButton) {
