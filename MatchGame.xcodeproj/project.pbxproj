@@ -10,6 +10,7 @@
 		72419D5F1CEDA16D00E2A5E8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72419D5E1CEDA16C00E2A5E8 /* AVFoundation.framework */; };
 		72419D611CEDA2B300E2A5E8 /* Grid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 72419D601CEDA2B300E2A5E8 /* Grid.atlas */; };
 		72419D631CEDB30500E2A5E8 /* Level_5.json in Resources */ = {isa = PBXBuildFile; fileRef = 72419D621CEDB30500E2A5E8 /* Level_5.json */; };
+		726C74131CEEF1DF002424C6 /* duncecapbb_reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 726C74121CEEEFCA002424C6 /* duncecapbb_reg.otf */; };
 		CC5518221B0A342400CA85E9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518211B0A342400CA85E9 /* Line.swift */; };
 		CC5518241B0A5DBC00CA85E9 /* cookie.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5518231B0A5DBC00CA85E9 /* cookie.png */; };
 		CC5518261B0A6A2700CA85E9 /* menuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5518251B0A6A2700CA85E9 /* menuViewController.swift */; };
@@ -59,6 +60,7 @@
 		72419D5E1CEDA16C00E2A5E8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		72419D601CEDA2B300E2A5E8 /* Grid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Grid.atlas; sourceTree = "<group>"; };
 		72419D621CEDB30500E2A5E8 /* Level_5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_5.json; sourceTree = "<group>"; };
+		726C74121CEEEFCA002424C6 /* duncecapbb_reg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = duncecapbb_reg.otf; sourceTree = "<group>"; };
 		CC5518211B0A342400CA85E9 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		CC5518231B0A5DBC00CA85E9 /* cookie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookie.png; sourceTree = "<group>"; };
 		CC5518251B0A6A2700CA85E9 /* menuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		CCDC02C01B053BE0004CD7A8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				726C74121CEEEFCA002424C6 /* duncecapbb_reg.otf */,
 				CCDC02CA1B053BE0004CD7A8 /* Main.storyboard */,
 				CCDC02CF1B053BE0004CD7A8 /* LaunchScreen.xib */,
 				CC5518231B0A5DBC00CA85E9 /* cookie.png */,
@@ -309,6 +312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				726C74131CEEF1DF002424C6 /* duncecapbb_reg.otf in Resources */,
 				CCDC02D11B053BE0004CD7A8 /* LaunchScreen.xib in Resources */,
 				CCDC03071B0575E8004CD7A8 /* Drip.wav in Resources */,
 				72419D611CEDA2B300E2A5E8 /* Grid.atlas in Resources */,

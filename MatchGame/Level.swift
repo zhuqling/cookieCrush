@@ -17,7 +17,7 @@ class Level {
     
     private var possibleSwaps = Set<Swap>()
     
-    // MARK: - init
+    // MARK: - 关卡加载
     
     // 从关卡文件加载
     init(filename: String) {
@@ -50,22 +50,7 @@ class Level {
         }
     }
     
-    // MARK: - util
-    
-    // 按坐标访问贴砖
-    func tileAtColumn(column: Int, row: Int) -> Tile? {
-        assert(column >= 0 && column < NumColumns)
-        assert(row >= 0 && row < NumRows)
-        return tiles[column, row]
-    }
-    
-    // 按坐标访问元素
-    func cookieAtColumn(column: Int, row: Int) -> Cookie? {
-        assert(column >= 0 && column < NumColumns)
-        assert(row >= 0 && row < NumRows)
-        
-        return cookies[column, row]
-    }
+    // MARK: - Game Setup
     
     // 随机
     func shuffle() -> Set<Cookie> {
@@ -109,6 +94,13 @@ class Level {
         }
         return set
     }
+    
+    // 复位连击
+    func resetComboMultiplier(){
+        comboMultiplier = 1
+    }
+    
+    // MARK: - 检测交换
     
     // 检测交换是否成立，是否满足横向/纵向的匹配
     func detectPossibleSwaps() {
@@ -199,6 +191,8 @@ class Level {
         return vertLength >= 3
     }
     
+    // MARK: -  交换
+    
     // 执行交换
     func performSwap(swap: Swap) {
         let columnA = swap.cookieA.column
@@ -216,10 +210,7 @@ class Level {
         swap.cookieA.row = rowB
     }
     
-    // 检测交换是否成立
-    func isPossibleSwap(swap: Swap) -> Bool {
-        return possibleSwaps.contains(swap)
-    }
+    // MARK: - 检测匹配
     
     // 检测横向匹配
     private func detectHorizontalMatches() -> Set<Line> {
@@ -302,6 +293,17 @@ class Level {
         }
     }
     
+    // 计分
+    func calculateScores(chains: Set<Line>) {
+        // 3-chain is 60 pts, 4-chain is 120, 5-chain is 180, and so on
+        for chain in chains {
+            chain.points = 60 * (chain.length - 2) * comboMultiplier
+            comboMultiplier += 1
+        }
+    }
+    
+    // MARK: - 检测空洞
+    
     // 填充空洞（数据模型），用于移除匹配后自动将上面的元素移下，并填充新的元素
     func fillHoles() -> [[Cookie]] {
         var columns = [[Cookie]]()
@@ -365,18 +367,26 @@ class Level {
         return columns
     }
     
-    // 计分
-    func calculateScores(chains: Set<Line>) {
-        // 3-chain is 60 pts, 4-chain is 120, 5-chain is 180, and so on
-        for chain in chains {
-            chain.points = 60 * (chain.length - 2) * comboMultiplier
-            comboMultiplier += 1
-        }
+    // MARK: - 查询工具
+    
+    // 按坐标访问贴砖
+    func tileAtColumn(column: Int, row: Int) -> Tile? {
+        assert(column >= 0 && column < NumColumns)
+        assert(row >= 0 && row < NumRows)
+        return tiles[column, row]
     }
     
-    // 复位连击
-    func resetComboMultiplier(){
-        comboMultiplier = 1
+    // 按坐标访问元素
+    func cookieAtColumn(column: Int, row: Int) -> Cookie? {
+        assert(column >= 0 && column < NumColumns)
+        assert(row >= 0 && row < NumRows)
+        
+        return cookies[column, row]
+    }
+    
+    // 检测交换是否成立
+    func isPossibleSwap(swap: Swap) -> Bool {
+        return possibleSwaps.contains(swap)
     }
 }
 

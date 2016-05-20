@@ -24,6 +24,8 @@ class GameViewController: UIViewController {
     
     var backgroundMusic: AVAudioPlayer!
     
+    // MARK: - init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,8 +33,8 @@ class GameViewController: UIViewController {
         
         // Configure the view.
         let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+//        skView.showsFPS = true
+//        skView.showsNodeCount = true
         skView.multipleTouchEnabled = false;
 //        skView.ignoresSiblingOrder = true;
         
@@ -60,6 +62,7 @@ class GameViewController: UIViewController {
         beginGame()
     }
     
+    // MARK: - 控件事件
     
     @IBAction func shuffleButtonTapped(sender: UIButton) {
         shuffle()
@@ -68,6 +71,22 @@ class GameViewController: UIViewController {
     
     @IBAction func menuButtonTapped(sender: UIButton) {
         self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    // MARK: - 游戏控制
+    
+    func beginGame() {
+        // 复位
+        movesLeft = level.maximumMoves
+        score = 0
+        updateLabels()
+        
+        level.resetComboMultiplier() // 复位连击
+        scene.animateBeginGame() // 动效
+        shuffle() // 随机生成新元素
+        
+        self.shuffleButton.hidden = false
+        self.menuButton.hidden = false
     }
     
     func showGameEnd() {
@@ -91,55 +110,6 @@ class GameViewController: UIViewController {
         }
     }
     
-    func updateRecords(){
-        var min = NSInteger.max
-        var recordid:CKRecordID?
-        
-        for record in CloudManager.sharedInstance.arrNotes as [CKRecord]!{
-           let recordScore = record.valueForKey("gameScore") as? NSInteger
-            
-            if recordScore < min{
-                min = recordScore!
-                recordid = record.recordID
-            }
-        }
-        
-        if score >= min && recordid != nil{
-            
-            let container = CKContainer.defaultContainer()
-            let publicDatabase = container.publicCloudDatabase
-            
-            publicDatabase.deleteRecordWithID(recordid!, completionHandler: { (recordID, error) -> Void in
-                if error != nil {
-                    print(error)
-                }
-            })
-            
-        }
-        
-    }
-    
-    func addNewRecord(){
-        
-        let noteRecord = CKRecord(recordType: "ScoreBoard")
-        
-        noteRecord.setObject(score, forKey: "gameScore")
-        noteRecord.setObject(NSDate(), forKey: "gamePlayedDate")
-        
-        
-        let container = CKContainer.defaultContainer()
-        let publicDatabase = container.publicCloudDatabase
-        
-        publicDatabase.saveRecord(noteRecord, completionHandler: { (record, error) -> Void in
-            if (error != nil) {
-                print(error)
-            }
-            else{
-                CloudManager.sharedInstance.arrNotes.append(noteRecord)
-            }
-        })
-    }
-    
     func hideGameEnd() {
         self.view.removeGestureRecognizer(tapGestureRecognizer)
         self.tapGestureRecognizer = nil
@@ -148,51 +118,6 @@ class GameViewController: UIViewController {
         scene.userInteractionEnabled = true
         
         beginGame()
-    }
-    
-    func updateLabels() {
-        targetLabel.text = String(format: "%ld", level.targetScore)
-        movesLabel.text = String(format: "%ld", movesLeft)
-        scoreLabel.text = String(format: "%ld", score)
-    }
-
-    override func shouldAutorotate() -> Bool {
-        return true
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.AllButUpsideDown
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
-
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
-    func beginGame() {
-        // 复位
-        movesLeft = level.maximumMoves
-        score = 0
-        updateLabels()
-        
-        level.resetComboMultiplier() // 复位连击
-        scene.animateBeginGame() // 动效
-        shuffle() // 随机生成新元素
-        
-        self.shuffleButton.hidden = false
-        self.menuButton.hidden = false
-    }
-    
-    // 随机
-    func shuffle() {
-        let newCookies = level.shuffle()
-        
-        scene.removeAllCookieSprites() // 先清除原有的所有元素
-        scene.addSpritesForCookies(newCookies)
     }
     
     // 手势
@@ -208,6 +133,8 @@ class GameViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: - 游戏逻辑
     
     // 处理匹配
     func handleMatches() {
@@ -260,5 +187,87 @@ class GameViewController: UIViewController {
             self.gameEndView.image = UIImage(named: "GameOver")
             showGameEnd()
         }
+    }
+    
+    // 随机
+    func shuffle() {
+        let newCookies = level.shuffle()
+        
+        scene.removeAllCookieSprites() // 先清除原有的所有元素
+        scene.addSpritesForCookies(newCookies)
+    }
+    
+    // MARK: - UI及分数更新
+    
+    func updateRecords(){
+        var min = NSInteger.max
+        var recordid:CKRecordID?
+        
+        for record in CloudManager.sharedInstance.arrNotes as [CKRecord]!{
+           let recordScore = record.valueForKey("gameScore") as? NSInteger
+            
+            if recordScore < min{
+                min = recordScore!
+                recordid = record.recordID
+            }
+        }
+        
+        if score >= min && recordid != nil{
+            
+            let container = CKContainer.defaultContainer()
+            let publicDatabase = container.publicCloudDatabase
+            
+            publicDatabase.deleteRecordWithID(recordid!, completionHandler: { (recordID, error) -> Void in
+                if error != nil {
+                    print(error)
+                }
+            })
+            
+        }
+    }
+    
+    func updateLabels() {
+        targetLabel.text = String(format: "%ld", level.targetScore)
+        movesLabel.text = String(format: "%ld", movesLeft)
+        scoreLabel.text = String(format: "%ld", score)
+    }
+    
+    func addNewRecord(){
+        let noteRecord = CKRecord(recordType: "ScoreBoard")
+        
+        noteRecord.setObject(score, forKey: "gameScore")
+        noteRecord.setObject(NSDate(), forKey: "gamePlayedDate")
+        
+        
+        let container = CKContainer.defaultContainer()
+        let publicDatabase = container.publicCloudDatabase
+        
+        publicDatabase.saveRecord(noteRecord, completionHandler: { (record, error) -> Void in
+            if (error != nil) {
+                print(error)
+            }
+            else{
+                CloudManager.sharedInstance.arrNotes.append(noteRecord)
+            }
+        })
+    }
+    
+    // MARK: -
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.AllButUpsideDown
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Release any cached data, images, etc that aren't in use.
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 }

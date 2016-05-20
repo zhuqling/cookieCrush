@@ -1,3 +1,6 @@
+/*
+ * 用于判断匹配，横向/纵向
+ */
 
 class Line: Hashable, CustomStringConvertible {
     var cookies = [Cookie]()
@@ -5,8 +8,8 @@ class Line: Hashable, CustomStringConvertible {
     var points = 0 // 分数
     
     enum LineType: CustomStringConvertible {
-        case Horizontal
-        case Vertical
+        case Horizontal // 横向匹配
+        case Vertical // 纵向匹配
         
         var description: String {
             switch self {

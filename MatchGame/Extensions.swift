@@ -1,3 +1,6 @@
+/*
+ * 扩展类
+ */
 
 import Foundation
 
@@ -5,20 +8,18 @@ extension Dictionary {
     static func loadJSONFromBundle(filename: String) -> Dictionary<String, AnyObject>? {
         if let path = NSBundle.mainBundle().pathForResource(filename, ofType: "json") {
             
-            var error: NSError?
-            let data = NSData.init(contentsOfFile: path) // NSData(contentsOfFile: path, options: NSDataReadingOptions(), error: &error)
+            let data = NSData.init(contentsOfFile: path)
             if let data = data {
-                
                 let dictionary: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(data,
                     options: NSJSONReadingOptions())
                 if let dictionary = dictionary as? Dictionary<String, AnyObject> {
                     return dictionary
                 } else {
-                    print("Level file '\(filename)' is not valid JSON: \(error!)")
+                    print("Level file '\(filename)' is not valid JSON")
                     return nil
                 }
             } else {
-                print("Could not load level file: \(filename), error: \(error!)")
+                print("Could not load level file: \(filename)")
                 return nil
             }
         } else {

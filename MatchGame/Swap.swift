@@ -1,3 +1,6 @@
+/*
+ * 交换
+ */
 
 struct Swap: CustomStringConvertible, Hashable{
     let cookieA: Cookie

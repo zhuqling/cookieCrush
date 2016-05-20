@@ -36,5 +36,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>duncecapbb_reg.otf</string>
+	</array>
 </dict>
 </plist>

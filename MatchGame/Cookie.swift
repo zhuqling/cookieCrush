@@ -4,7 +4,6 @@
 
 import SpriteKit
 
-// The objects that you put into the set must conform to the Hashable protocol
 class Cookie : CustomStringConvertible, Hashable {
     var column: Int
     var row: Int

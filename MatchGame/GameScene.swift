@@ -1,3 +1,6 @@
+/*
+ * 场景
+ */
 
 import SpriteKit
 
@@ -27,6 +30,8 @@ class GameScene: SKScene {
     let matchSound = SKAction.playSoundFileNamed("Ka-Ching.wav", waitForCompletion: false)
     let fallingCookieSound = SKAction.playSoundFileNamed("Scrape.wav", waitForCompletion: false)
     let addCookieSound = SKAction.playSoundFileNamed("Drip.wav", waitForCompletion: false)
+    
+    // MARK: - init
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder) is not used in this app")
@@ -68,34 +73,7 @@ class GameScene: SKScene {
         self.level = level
     }
     
-    // 初始元素Sprite
-    func addSpritesForCookies(cookies: Set<Cookie>) {
-        for cookie in cookies {
-            let sprite = SKSpriteNode(imageNamed: cookie.cookieType.spriteName)
-            sprite.position = pointForColumn(cookie.column, row:cookie.row)
-            cookiesLayer.addChild(sprite)
-            cookie.sprite = sprite
-            
-            // 动效
-            sprite.alpha = 0
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.runAction(SKAction.sequence([
-                SKAction.waitForDuration(0.25, withRange: 0.5),
-                SKAction.group([
-                    SKAction.fadeInWithDuration(0.25),
-                    SKAction.scaleTo(1.0, duration: 0.25)
-                ])
-            ]))
-        }
-    }
-    
-    // 坐标定位
-    func pointForColumn(column: Int, row: Int) -> CGPoint {
-        return CGPoint(
-            x: CGFloat(column)*TileWidth + TileWidth/2,
-            y: CGFloat(row)*TileHeight + TileHeight/2)
-    }
+    // MARK: - Game setup
     
     // 初始化贴砖
     func addTiles() {
@@ -138,7 +116,34 @@ class GameScene: SKScene {
         }
     }
     
-    // MARK: - 手势
+    // 初始元素Sprite
+    func addSpritesForCookies(cookies: Set<Cookie>) {
+        for cookie in cookies {
+            let sprite = SKSpriteNode(imageNamed: cookie.cookieType.spriteName)
+            sprite.position = pointForColumn(cookie.column, row:cookie.row)
+            cookiesLayer.addChild(sprite)
+            cookie.sprite = sprite
+            
+            // 动效
+            sprite.alpha = 0
+            sprite.xScale = 0.5
+            sprite.yScale = 0.5
+            sprite.runAction(SKAction.sequence([
+                SKAction.waitForDuration(0.25, withRange: 0.5),
+                SKAction.group([
+                    SKAction.fadeInWithDuration(0.25),
+                    SKAction.scaleTo(1.0, duration: 0.25)
+                    ])
+                ]))
+        }
+    }
+    
+    func removeAllCookieSprites() {
+        cookiesLayer.removeAllChildren()
+    }
+    
+    // MARK: - 手势检测
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first!
         let location = touch.locationInNode(cookiesLayer)
@@ -183,6 +188,23 @@ class GameScene: SKScene {
         }
     }
     
+    // 尝试交换位置
+    func trySwapHorizontal(horzDelta: Int, vertical vertDelta: Int) {
+        let toColumn = swipeFromColumn! + horzDelta
+        let toRow = swipeFromRow! + vertDelta
+        
+        if toColumn < 0 || toColumn >= level.NumColumns { return }
+        if toRow < 0 || toRow >= level.NumRows { return }
+        
+        if let toCookie = level.cookieAtColumn(toColumn, row: toRow),
+            let fromCookie = level.cookieAtColumn(swipeFromColumn!, row: swipeFromRow!),
+            let handler = swipeHandler
+        {
+            let swap = Swap(cookieA: fromCookie, cookieB: toCookie)
+            handler(swap)
+        }
+    }
+    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         swipeFromColumn = nil
         swipeFromRow = nil
@@ -196,55 +218,7 @@ class GameScene: SKScene {
         touchesEnded(touches!, withEvent: event)
     }
     
-    // MARK: - 工具方法
-    
-    // 坐标转换
-    func convertPoint(point: CGPoint) -> (success: Bool, column: Int, row: Int) {
-        if point.x >= 0 && point.x < CGFloat(level.NumColumns)*TileWidth &&
-            point.y >= 0 && point.y < CGFloat(level.NumRows)*TileHeight {
-            return (true, Int(point.x / TileWidth), Int(point.y / TileHeight))
-        } else {
-            return (false, 0, 0)  // invalid location
-        }
-    }
-    
-    // 尝试交换位置
-    func trySwapHorizontal(horzDelta: Int, vertical vertDelta: Int) {
-        let toColumn = swipeFromColumn! + horzDelta
-        let toRow = swipeFromRow! + vertDelta
-
-        if toColumn < 0 || toColumn >= level.NumColumns { return }
-        if toRow < 0 || toRow >= level.NumRows { return }
-
-        if let toCookie = level.cookieAtColumn(toColumn, row: toRow),
-           let fromCookie = level.cookieAtColumn(swipeFromColumn!, row: swipeFromRow!),
-           let handler = swipeHandler
-        {
-            let swap = Swap(cookieA: fromCookie, cookieB: toCookie)
-            handler(swap)
-        }
-    }
-    
-    // 动效交换
-    func animateSwap(swap: Swap, completion: () -> ()) {
-        runAction(swapSound)
-        
-        let spriteA = swap.cookieA.sprite!
-        let spriteB = swap.cookieB.sprite!
-        
-        spriteA.zPosition = 100
-        spriteB.zPosition = 90
-        
-        let duration: NSTimeInterval = 0.3
-        
-        let moveA = SKAction.moveTo(spriteB.position, duration: duration)
-        moveA.timingMode = .EaseOut
-        spriteA.runAction(moveA, completion: completion)
-        
-        let moveB = SKAction.moveTo(spriteA.position, duration: duration)
-        moveB.timingMode = .EaseOut
-        spriteB.runAction(moveB)
-    }
+    // MARK: - 选中高亮
     
     // 高亮选中元素
     func showSelectionIndicatorForCookie(cookie: Cookie) {
@@ -267,6 +241,29 @@ class GameScene: SKScene {
         selectionSprite.runAction(SKAction.sequence([
             SKAction.fadeOutWithDuration(0.3),
             SKAction.removeFromParent()]))
+    }
+    
+    // MARK: - Animations
+    
+    // 动效交换
+    func animateSwap(swap: Swap, completion: () -> ()) {
+        runAction(swapSound)
+        
+        let spriteA = swap.cookieA.sprite!
+        let spriteB = swap.cookieB.sprite!
+        
+        spriteA.zPosition = 100
+        spriteB.zPosition = 90
+        
+        let duration: NSTimeInterval = 0.3
+        
+        let moveA = SKAction.moveTo(spriteB.position, duration: duration)
+        moveA.timingMode = .EaseOut
+        spriteA.runAction(moveA, completion: completion)
+        
+        let moveB = SKAction.moveTo(spriteA.position, duration: duration)
+        moveB.timingMode = .EaseOut
+        spriteB.runAction(moveB)
     }
     
     // 动效无效交换
@@ -405,10 +402,6 @@ class GameScene: SKScene {
         }
     }
     
-    func removeAllCookieSprites() {
-        cookiesLayer.removeAllChildren()
-    }
-    
     // 动效游戏结束
     func animateGameOver(){
         let action = SKAction.moveBy(CGVectorMake(0, -self.size.height), duration: 0.3)
@@ -424,5 +417,24 @@ class GameScene: SKScene {
         let action = SKAction.moveBy(CGVectorMake(0, -self.size.height), duration: 0.3)
         action.timingMode = .EaseOut
         gameLayer.runAction(action)
+    }
+    
+    // MARK: - 工具
+    
+    // 坐标定位
+    func pointForColumn(column: Int, row: Int) -> CGPoint {
+        return CGPoint(
+            x: CGFloat(column)*TileWidth + TileWidth/2,
+            y: CGFloat(row)*TileHeight + TileHeight/2)
+    }
+    
+    // 坐标转换
+    func convertPoint(point: CGPoint) -> (success: Bool, column: Int, row: Int) {
+        if point.x >= 0 && point.x < CGFloat(level.NumColumns)*TileWidth &&
+            point.y >= 0 && point.y < CGFloat(level.NumRows)*TileHeight {
+            return (true, Int(point.x / TileWidth), Int(point.y / TileHeight))
+        } else {
+            return (false, 0, 0)  // invalid location
+        }
     }
 }
